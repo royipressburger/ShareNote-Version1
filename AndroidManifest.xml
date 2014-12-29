@@ -17,14 +17,6 @@
         android:theme="@style/Theme.AppCompat.Light" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".CreateListActivity"
-            android:label="@string/title_activity_create_list_screen" >
-        </activity>
-        <activity
-            android:name=".ListTimeActivity"
             android:label="@string/title_activity_list_time" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,11 +25,25 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".CreateListActivity"
+            android:label="@string/title_activity_create_list_screen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.noteversion1.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ListTimeActivity"
+            android:label="@string/title_activity_list_time" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.noteversion1.SelectUsersActivity" />
+        </activity>
+        <activity
             android:name=".SelectUsersActivity"
             android:label="@string/title_activity_select_users" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.noteversion1.SelectUsersActivity" />
+                android:value="com.example.noteversion1.CreateListActivity" />
         </activity>
         <activity
             android:name=".ListSettingActivity"

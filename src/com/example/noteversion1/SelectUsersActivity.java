@@ -3,6 +3,7 @@ package com.example.noteversion1;
 import java.util.ArrayList;
 
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -109,5 +110,7 @@ public class SelectUsersActivity extends AbsractAppActivity
 	@Override
 	public void onButtonNextClicked() 
 	{
+		Intent intent = new Intent(this, ListTimeActivity.class);
+		startActivity(intent);
 	}
 }

@@ -18,7 +18,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="New"
-        android:onClick="createNewList" />
+        android:onClick="createNewList"/>
 
     <ListView
         android:id="@+id/listView1"

@@ -25,8 +25,7 @@ public class ListTimeActivity extends AbsractAppActivity
 		mTimePicker.setIs24HourView(true);
 		mDatePicker = (DatePicker) findViewById(R.id.listDateEnd);
 		
-		android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-	    actionBar.setDisplayHomeAsUpEnabled(false);
+
 	}
 	
 	public void onButtonSetTimeClicked(View view)
