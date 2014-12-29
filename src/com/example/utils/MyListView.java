@@ -15,7 +15,7 @@ public class MyListView<T>
 	/**
 	 * Create a generic list view
 	 * @param contex - the activity that contains the list
-	 * @param layout - exapmle (android.R.layout.simple_list_item_1)
+	 * @param layout - example (android.R.layout.simple_list_item_1)
 	 * @param listView - the id of the listView in the given activity.
 	 */
 	public MyListView(Activity contex, int layout, ListView listView)
@@ -35,5 +35,15 @@ public class MyListView<T>
 	{
 		mItems.add(objectToAdd);
 		mAdapter.notifyDataSetChanged();
+	}
+	
+	public void setChoiseMode(int mode)
+	{
+		mListView.setChoiceMode(mode);   
+		mListView.setItemsCanFocus(false);
+	}
+
+	public ArrayAdapter<T> getAdapter() {
+		return mAdapter;
 	}
 }
