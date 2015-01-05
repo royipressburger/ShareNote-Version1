@@ -1,6 +1,8 @@
-package com.example.noteversion1;
+package com.example.noteversion1.activities;
 
 import java.util.Date;
+
+import com.example.noteversion1.R;
 
 import android.content.Intent;
 import android.os.Bundle;

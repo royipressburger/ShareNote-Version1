@@ -1,4 +1,4 @@
-package com.example.noteversion1;
+package com.example.noteversion1.activities;
 
 import java.util.ArrayList;
 
@@ -12,8 +12,9 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
-import com.example.utils.MyListView;
-import com.example.utils.NoteContact;
+import com.example.noteversion1.R;
+import com.example.noteversion1.utils.MyListView;
+import com.example.noteversion1.utils.NoteContact;
 
 public class SelectUsersActivity extends AbsractAppActivity 
 {

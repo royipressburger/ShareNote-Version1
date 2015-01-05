@@ -1,4 +1,6 @@
-package com.example.noteversion1;
+package com.example.noteversion1.activities;
+
+import com.example.noteversion1.R;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
