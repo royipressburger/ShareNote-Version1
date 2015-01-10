@@ -9,7 +9,7 @@
     tools:context="com.example.noteversion1.activities.SelectUsersActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewListName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:layout_below="@+id/textView1" >
+        android:layout_below="@+id/textViewListName" >
     </SearchView>
 
     <ListView

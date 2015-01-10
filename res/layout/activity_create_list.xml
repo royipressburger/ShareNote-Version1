@@ -5,7 +5,7 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewListName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/createList"

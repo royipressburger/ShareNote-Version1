@@ -15,5 +15,6 @@
     <string name="select_users_massage">Who do you want to share is with?</string>
     <string name="action_search">Search</string>
     <string name="title_activity_list_setting">ListSettingActivity</string>
+    <string name="title_activity_shopping_list">ShoppingListActivity</string>
 
 </resources>
