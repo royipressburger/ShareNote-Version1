@@ -33,8 +33,11 @@ public class MyListView<T>
 	 */
 	public void add(T objectToAdd)
 	{
-		mItems.add(objectToAdd);
-		mAdapter.notifyDataSetChanged();
+		if (!mItems.contains(objectToAdd))
+		{
+			mItems.add(objectToAdd);
+			mAdapter.notifyDataSetChanged();
+		}
 	}
 	
 	public void setChoiseMode(int mode)

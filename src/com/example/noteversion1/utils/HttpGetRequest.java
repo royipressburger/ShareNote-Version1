@@ -1,6 +1,8 @@
 package com.example.noteversion1.utils;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,45 +22,20 @@ import org.apache.http.message.BasicNameValuePair;
  * @author Royi
  *
  */
-public class HttpGetRequest 
+public class HttpGetRequest extends AbstractHttpRequest
 {
 
-	private HttpClient httpClient;
     private HttpGet httpGet;
-    private String url;
-    private List<NameValuePair> urlParams;
-    private HttpResponse response;
-    
     public HttpGetRequest(String url)
     {
-    	this.url = url;
-    	httpClient = new DefaultHttpClient();
-    	urlParams = new LinkedList<NameValuePair>();
+    	super(url);
+    	httpGet = new HttpGet();
     }
     
-    public void execute() throws ClientProtocolException, IOException
+    public void execute() throws ClientProtocolException, IOException, URISyntaxException
     {
-    	if (!urlParams.isEmpty())
-    	{
-    		url += "?" + URLEncodedUtils.format(urlParams, "utf-8");
-    	}
-    	
-    	httpGet = new HttpGet(url);
+    	addParamsToUrl();
+    	httpGet.setURI(new URI(url));
     	response =  httpClient.execute(httpGet);
     }
-    
-    public void addParamerters(String key, String value)
-    {
-    	urlParams.add(new BasicNameValuePair(key,value));
-    }
-    
-    public String getResponseBody() throws HttpResponseException, IOException
-    {
-    	return new BasicResponseHandler().handleResponse(response);
-    }
-    
-	public HttpResponse getResponse() 
-	{
-		return response;
-	}
 }
