@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">noteVersion2</string>
+    <string name="app_name">Share-Note MiLab</string>
     <string name="hello_world">Hello world!</string>
     <string name="LOGO">My Shared Note!</string>
     <string name="title_activity_create_list_screen">CreateListScreen</string>
     <string name="createList">Name Your List</string>
     <string name="listName">list name...</string>
-    <string name="title_activity_list_time">Time</string>
+    <string name="title_activity_list_time">Share-Note MiLab</string>
     <string name="title_activity_select_users">SelectUsersActivity</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_absract_app">AbsractAppActivity</string>
@@ -15,5 +15,6 @@
     <string name="select_users_massage">Who do you want to share is with?</string>
     <string name="action_search">Search</string>
     <string name="title_activity_list_setting">ListSettingActivity</string>
+    <string name="title_activity_shopping_list">ShoppingListActivity</string>
 
 </resources>

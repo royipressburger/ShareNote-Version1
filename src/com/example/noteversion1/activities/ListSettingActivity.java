@@ -1,4 +1,6 @@
-package com.example.noteversion1;
+package com.example.noteversion1.activities;
+
+import com.example.noteversion1.R;
 
 import android.app.Activity;
 import android.os.Bundle;
