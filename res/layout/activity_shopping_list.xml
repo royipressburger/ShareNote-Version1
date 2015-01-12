@@ -22,11 +22,40 @@
         android:layout_centerHorizontal="true"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <ListView
-        android:id="@+id/listViewListItems"
-        android:layout_width="fill_parent"
+    <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/textViewListUsers"
+    android:layout_above="@+id/buttonAddItem"
+    tools:context="${relativePackage}.${activityClass}" >
+    	<ListView
+      	 	android:id="@+id/listViewListItems"
+        	android:layout_width="fill_parent"
+       	 	android:layout_height="fill_parent"
+        	
+        	android:layout_centerHorizontal="true" >
+    	</ListView>
+	</RelativeLayout>
+	
+    <EditText
+        android:id="@+id/editTextItem"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewListUsers"
-        android:layout_centerHorizontal="true" >
-    </ListView>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/buttonAddItem"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Button" 
+        android:onClick="buttonAddItemClicked"/>
+
 </RelativeLayout>
