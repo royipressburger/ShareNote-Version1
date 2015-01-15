@@ -53,6 +53,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 	{
 		String itemToAdd = editTextItemToAdd.getText().toString();
 		new AddItemToListTask(this).execute("2", itemToAdd);
+		editTextItemToAdd.setText("");
 		
 	}
 	

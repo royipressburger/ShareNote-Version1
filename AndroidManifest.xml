@@ -17,19 +17,8 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light" >
         <activity
-<<<<<<< HEAD
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-=======
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_list_time" >
-            
->>>>>>> 5717e124854c1e4ab8bd083fd015f20646f1e20c
         </activity>
         <activity
             android:name=".activities.CreateListActivity"

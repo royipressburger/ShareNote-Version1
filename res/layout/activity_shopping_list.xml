@@ -43,7 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:ems="10" >
+        android:ems="10"
+        android:hint="@string/addItem" >
 
         <requestFocus />
     </EditText>
