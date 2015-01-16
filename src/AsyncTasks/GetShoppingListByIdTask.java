@@ -34,9 +34,15 @@ import com.example.noteversion1.utils.Utils;
  */
 public class GetShoppingListByIdTask extends AsyncTask<String, Void, JSONObject>
 {
-	private ShoppingListActivity mCaller;
+	private OnFinishedListener mCaller;
 	
-	public GetShoppingListByIdTask(ShoppingListActivity caller)
+    public interface OnFinishedListener 
+    {
+        public void onSuccess(JSONObject json);
+        public void onError();
+    }
+    
+	public GetShoppingListByIdTask(OnFinishedListener caller)
 	{
 		mCaller = caller;
 	}
@@ -70,23 +76,21 @@ public class GetShoppingListByIdTask extends AsyncTask<String, Void, JSONObject>
 			e.printStackTrace();
 		}
 		
-		
 		return jsonList;
 	}
 	
 	@Override
 	protected void onPostExecute(JSONObject result) 
 	{
-		ShoppingList listToSet = new ShoppingList();
-		try {
-			listToSet.setName(result.getString(ConstService.LIST_NAME));
-			listToSet.setItems(Utils.jsonArrayToList(result.getJSONArray(ConstService.LIST_ITEMS)));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		super.onPostExecute(result);
 		
-		mCaller.setShoppingList(listToSet);
-		mCaller.asyncTaskGetListEndded();
+		if (result != null)
+		{
+			mCaller.onSuccess(result);
+		}
+		else
+		{
+			mCaller.onError();
+		}
 	}
 }

@@ -12,22 +12,29 @@ import com.example.noteversion1.activities.ShoppingListActivity;
 import com.example.noteversion1.utils.ConstService;
 import com.example.noteversion1.utils.HttpPostRequest;
 
-public class AddItemToListTask extends AsyncTask<String, Void, Void>
+public class AddItemToListTask extends AsyncTask<String, Void, Boolean>
 {
-	private ShoppingListActivity mCaller;
+	private OnFinishedListener mCaller;
 	
-	public AddItemToListTask(ShoppingListActivity caller)
+    public interface OnFinishedListener 
+    {
+        public void onSuccess();
+        public void onError();
+    }
+    
+	public AddItemToListTask(OnFinishedListener caller)
 	{
 		mCaller = caller;
 	}
 
 	@Override
-	protected Void doInBackground(String... params) 
+	protected Boolean doInBackground(String... params) 
 	{
 		String listId = params[0];
 		HttpPostRequest newRequest = new HttpPostRequest(ConstService.SERVER_URL + ConstService.SERVER_ADD_ITEMS_SERVLET);
 		newRequest.addParamerters(ConstService.URL_PARAM_LIST_ID, listId);
-		//JSONObject body = new JSONObject();
+		
+		boolean isSuccess = true;
 		JSONArray itemsArray = new JSONArray();
 		for (int i = 1; i < params.length; i++) 
 		{
@@ -39,22 +46,30 @@ public class AddItemToListTask extends AsyncTask<String, Void, Void>
 		try {
 			newRequest.execute();
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
+			isSuccess = false;
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			isSuccess = false;
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
+			isSuccess = false;
 			e.printStackTrace();
 		}
-		return null;
+		
+		return isSuccess;
 	}
 	
 	@Override
-	protected void onPostExecute(Void result) 
+	protected void onPostExecute(Boolean result) 
 	{
 		super.onPostExecute(result);
-		mCaller.listWasUpdated();
+		if (result)
+		{
+			mCaller.onSuccess();
+		}
+		else 
+		{
+			mCaller.onError();
+		}
 	}
 }
