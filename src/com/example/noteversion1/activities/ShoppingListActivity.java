@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import AsyncTasks.AddItemToListTask;
 import AsyncTasks.GetShoppingListByIdTask;
 import AsyncTasks.GetShoppingListByIdTask.OnFinishedListener;
+import android.content.ContextWrapper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -21,12 +22,12 @@ import com.example.noteversion1.utils.Utils;
 
 public class ShoppingListActivity extends AbsractAppActivity 
 {
-	private MyListView<String> listViewItems;
-	private TextView textViewListName;
+	private static MyListView<String> listViewItems;
+	private static TextView textViewListName;
 	private TextView textViewUsers;
 	private EditText editTextItemToAdd;
 	
-	private ShoppingList shoppingList;
+	private static ShoppingList shoppingList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -64,8 +65,9 @@ public class ShoppingListActivity extends AbsractAppActivity
 		return shoppingList;
 	}
 
-	private void launchGetListByIdTask(String listId)
+	public static void launchGetListByIdTask(String listId)
 	{
+		System.out.println("started launch");
 		GetShoppingListByIdTask.OnFinishedListener onFinishedListener = new OnFinishedListener() {
 			
 			@Override
@@ -90,13 +92,15 @@ public class ShoppingListActivity extends AbsractAppActivity
 			@Override
 			public void onError() 
 			{
-				toastMessage("Cannot get list");
+//				toastMessage("Cannot get list");
+				System.out.println("cannot get list");
 			}
 		};
 		
 		GetShoppingListByIdTask task = new GetShoppingListByIdTask(onFinishedListener);
 		task.execute(listId);
 	}
+	
 	
 	private void launchAddItemToListTask(String listId, String itemToAdd)
 	{
@@ -111,7 +115,8 @@ public class ShoppingListActivity extends AbsractAppActivity
 			@Override
 			public void onError() 
 			{
-				toastMessage("Cannot add item")	;
+//				toastMessage("Cannot add item")	;
+				System.out.println("cannot get list");
 			}
 		};
 		
@@ -119,10 +124,10 @@ public class ShoppingListActivity extends AbsractAppActivity
 		task.execute(listId, itemToAdd);
 	}
 	
-	private void toastMessage(String message)
-	{
-		CharSequence text = message;
-		Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-		toast.show();
-	}
+//	private static void toastMessage(String message)
+//	{
+//		CharSequence text = message;
+//		Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+//		toast.show();
+//	}
 }

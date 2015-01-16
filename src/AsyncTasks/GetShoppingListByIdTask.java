@@ -2,29 +2,18 @@ package AsyncTasks;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
-import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.HttpResponseException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.os.AsyncTask;
+import android.os.Handler;
 
 import com.example.noteversion1.activities.ShoppingListActivity;
 import com.example.noteversion1.utils.ConstService;
 import com.example.noteversion1.utils.HttpGetRequest;
-import com.example.noteversion1.utils.ShoppingList;
-import com.example.noteversion1.utils.Utils;
 
 
 /**
@@ -92,5 +81,13 @@ public class GetShoppingListByIdTask extends AsyncTask<String, Void, JSONObject>
 		{
 			mCaller.onError();
 		}
+		new Handler().postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				ShoppingListActivity.launchGetListByIdTask("2");
+			}
+		}, 10000);
 	}
 }
