@@ -6,8 +6,8 @@ import org.json.JSONObject;
 import AsyncTasks.AddItemToListTask;
 import AsyncTasks.GetShoppingListByIdTask;
 import AsyncTasks.GetShoppingListByIdTask.OnFinishedListener;
-import android.content.ContextWrapper;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -38,7 +38,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 		textViewListName = (TextView) findViewById(R.id.textViewListName);
 		textViewUsers = (TextView) findViewById(R.id.textViewListUsers);
 		editTextItemToAdd = (EditText) findViewById(R.id.editTextItem);
-		launchGetListByIdTask("2");
+//		launchGetListByIdTask("2");
 		//new AddItemToListTask().execute("2", "fish");
 	}
 
@@ -65,9 +65,8 @@ public class ShoppingListActivity extends AbsractAppActivity
 		return shoppingList;
 	}
 
-	public static void launchGetListByIdTask(String listId)
+	private static void launchGetListByIdTask(String listId)
 	{
-		System.out.println("started launch");
 		GetShoppingListByIdTask.OnFinishedListener onFinishedListener = new OnFinishedListener() {
 			
 			@Override
@@ -92,8 +91,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 			@Override
 			public void onError() 
 			{
-//				toastMessage("Cannot get list");
-				System.out.println("cannot get list");
+				System.out.println("Cannot get list");
 			}
 		};
 		
@@ -101,6 +99,9 @@ public class ShoppingListActivity extends AbsractAppActivity
 		task.execute(listId);
 	}
 	
+	public static void getUpdatedListFromServer(String listId){
+		launchGetListByIdTask(listId);
+	}
 	
 	private void launchAddItemToListTask(String listId, String itemToAdd)
 	{
@@ -115,8 +116,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 			@Override
 			public void onError() 
 			{
-//				toastMessage("Cannot add item")	;
-				System.out.println("cannot get list");
+				toastMessage("Cannot add item")	;
 			}
 		};
 		
@@ -124,10 +124,10 @@ public class ShoppingListActivity extends AbsractAppActivity
 		task.execute(listId, itemToAdd);
 	}
 	
-//	private static void toastMessage(String message)
-//	{
-//		CharSequence text = message;
-//		Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-//		toast.show();
-//	}
+	private void toastMessage(String message)
+	{
+		CharSequence text = message;
+		Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+		toast.show();
+	}
 }
