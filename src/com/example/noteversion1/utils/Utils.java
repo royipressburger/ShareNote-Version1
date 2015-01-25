@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.content.Context;
+import android.widget.Toast;
+
 public class Utils 
 {
 	public static ArrayList<String> jsonArrayToList(JSONArray array) throws JSONException
@@ -18,5 +21,12 @@ public class Utils
 		}
 		
 		return list;
+	}
+	
+	public static void toastMessage(String message, Context context)
+	{
+		CharSequence text = message;
+		Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+		toast.show();
 	}
 }

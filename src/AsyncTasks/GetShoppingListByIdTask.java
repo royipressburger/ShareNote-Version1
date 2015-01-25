@@ -24,7 +24,6 @@ import com.example.noteversion1.utils.HttpGetRequest;
 public class GetShoppingListByIdTask extends AsyncTask<String, Void, JSONObject>
 {
 	private OnFinishedListener mCaller;
-//	private ShoppingListActivity lst;
 	
     public interface OnFinishedListener 
     {
@@ -82,13 +81,5 @@ public class GetShoppingListByIdTask extends AsyncTask<String, Void, JSONObject>
 		{
 			mCaller.onError();
 		}
-		new Handler().postDelayed(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				ShoppingListActivity.getUpdatedListFromServer("2");
-			}
-		}, 10000);
 	}
 }
