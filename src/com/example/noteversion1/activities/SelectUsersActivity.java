@@ -2,41 +2,50 @@ package com.example.noteversion1.activities;
 
 import java.util.ArrayList;
 
+import NoteObjects.NoteContact;
+import NoteObjects.NoteContactInList;
+import NoteObjects.ShoppingList;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.SparseBooleanArray;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
 import com.example.noteversion1.R;
+import com.example.noteversion1.utils.Colors;
+import com.example.noteversion1.utils.ConstService;
 import com.example.noteversion1.utils.MyListView;
-import com.example.noteversion1.utils.NoteContact;
+import com.example.noteversion1.utils.Utils;
+import com.google.gson.Gson;
 
 public class SelectUsersActivity extends AbsractAppActivity 
 {
-	private MyListView<NoteContact> myList;
+	private MyListView<NoteContact> contacts;
+	private ShoppingList listToCreate;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_users);
+		listToCreate = new Gson().fromJson(getIntent().getExtras().getString(ConstService.BUNDLE_NEW_LIST), ShoppingList.class);
 		((SearchView) findViewById(R.id.searchView1)).setOnQueryTextListener(new OnQueryTextListener() {
 			
 			@Override
 			public boolean onQueryTextChange(String arg0) 
 			{
-				myList.getAdapter().getFilter().filter(arg0);
+				contacts.getAdapter().getFilter().filter(arg0);
 				return false;
 			}
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				myList.getAdapter().getFilter().filter(query);
+				contacts.getAdapter().getFilter().filter(query);
 				return false;
 			}
 		});
@@ -45,13 +54,13 @@ public class SelectUsersActivity extends AbsractAppActivity
 	@Override
 	public void onPostCreate(Bundle savedInstanceState) 
 	{
-		myList = new MyListView<NoteContact>(this, android.R.layout.simple_list_item_multiple_choice, (ListView) findViewById(R.id.contactsList));
+		contacts = new MyListView<NoteContact>(this, android.R.layout.simple_list_item_multiple_choice, (ListView) findViewById(R.id.contactsList));
 		
-		myList.setChoiseMode(ListView.CHOICE_MODE_MULTIPLE);
+		contacts.setChoiseMode(ListView.CHOICE_MODE_MULTIPLE);
 		
 		for (NoteContact contact : getAllContacts()) 
 		{
-			myList.add(contact);
+			contacts.add(contact);
 		}
 		
 		super.onPostCreate(savedInstanceState);
@@ -83,24 +92,25 @@ public class SelectUsersActivity extends AbsractAppActivity
 				int hasPhoneNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndex( HAS_PHONE_NUMBER )));
 				if (hasPhoneNumber > 0) 
 				{
-					contact.name = name;
+					contact.setName(name);
 					// Query and loop for every phone number of the contact
 					Cursor phoneCursor = contentResolver.query(PhoneCONTENT_URI, null, Phone_CONTACT_ID + " = ?", new String[] { contact_id }, null);
 					if (phoneCursor.moveToNext()) {
 						phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(NUMBER));
-						contact.phone = phoneNumber;
+						contact.setPhone(phoneNumber);
 					}
 					phoneCursor.close();
+					
 					// Query and loop for every email of the contact
-					Cursor emailCursor = contentResolver.query(EmailCONTENT_URI,    null, EmailCONTACT_ID+ " = ?", new String[] { contact_id }, null);
-					if (emailCursor.moveToNext()) {
-						email = emailCursor.getString(emailCursor.getColumnIndex(DATA));
-						contact.email = email;
-					}
-					emailCursor.close();
+//					Cursor emailCursor = contentResolver.query(EmailCONTENT_URI,    null, EmailCONTACT_ID+ " = ?", new String[] { contact_id }, null);
+//					if (emailCursor.moveToNext()) {
+//						email = emailCursor.getString(emailCursor.getColumnIndex(DATA));
+//						contact.email = email;
+//					}
+//					emailCursor.close();
 				}
 				
-				if (contact.name != null && contact.phone != null)
+				if (contact.getName() != null && contact.getPhone() != null)
 					contatcts.add(contact);
 			}
 		}
@@ -112,6 +122,32 @@ public class SelectUsersActivity extends AbsractAppActivity
 	public void onButtonNextClicked() 
 	{
 		Intent intent = new Intent(this, ListTimeActivity.class);
+		listToCreate.setUsers(getSelectedUsers());
+		intent.putExtra(ConstService.BUNDLE_NEW_LIST, new Gson().toJson(listToCreate));
 		startActivity(intent);
+	}
+
+	private ArrayList<NoteContactInList> getSelectedUsers() 
+	{
+		SparseBooleanArray checked = contacts.getListView().getCheckedItemPositions();
+		ArrayList<NoteContactInList> selectedContats = new ArrayList<NoteContactInList>();
+		int color = 0;
+		for (int i = 0; i < contacts.getListView().getAdapter().getCount(); i++) {
+		    if (checked.get(i)) 
+		    {
+		    	try 
+		    	{
+					NoteContactInList contact = new NoteContactInList((NoteContact) contacts.getListView().getItemAtPosition(i), Utils.ColorsToAndroidColor(Colors.values()[color]));
+					color++;
+					selectedContats.add(contact);
+				} 
+		    	catch (Exception e) 
+				{
+					Utils.toastMessage(e.getMessage(), getApplicationContext());
+				}
+		    }
+		}
+		
+		return selectedContats;
 	}
 }

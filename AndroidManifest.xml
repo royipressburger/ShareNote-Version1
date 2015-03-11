@@ -9,7 +9,7 @@
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET" /> 
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -19,9 +19,14 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_list_time" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
-            android:name=".activities.CreateListActivity"
+            android:name=".activities.SetListNameActivity"
             android:label="@string/title_activity_create_list_screen" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -46,13 +51,12 @@
             android:label="@string/title_activity_list_setting" >
         </activity>
         <activity
-            android:name="com.example.noteversion1.activities.ShoppingListActivity"
+            android:name=".activities.ShoppingListActivity"
             android:label="@string/title_activity_shopping_list" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.noteversion1.activities.RegisterActivity"
+            android:label="@string/title_activity_register" >
         </activity>
     </application>
 

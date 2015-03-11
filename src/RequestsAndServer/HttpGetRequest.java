@@ -1,4 +1,4 @@
-package com.example.noteversion1.utils;
+package RequestsAndServer;
 
 import java.io.IOException;
 import java.net.URI;

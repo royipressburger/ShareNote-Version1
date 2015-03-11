@@ -6,20 +6,21 @@ import org.json.JSONObject;
 import AsyncTasks.AddItemToListTask;
 import AsyncTasks.GetShoppingListByIdTask;
 import AsyncTasks.GetShoppingListByIdTask.OnFinishedListener;
-import android.content.ContextWrapper;
+import NoteObjects.NoteContact;
+import NoteObjects.NoteContactInList;
+import NoteObjects.ShoppingList;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.noteversion1.R;
 import com.example.noteversion1.utils.ConstService;
 import com.example.noteversion1.utils.MyListView;
-import com.example.noteversion1.utils.ShoppingList;
 import com.example.noteversion1.utils.Utils;
+import com.google.gson.Gson;
 
 public class ShoppingListActivity extends AbsractAppActivity 
 {
@@ -30,8 +31,6 @@ public class ShoppingListActivity extends AbsractAppActivity
 	
 	private ShoppingList shoppingList;
 	
-	private static final String DEMO_LIST_ID = "2";
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -41,8 +40,9 @@ public class ShoppingListActivity extends AbsractAppActivity
 		textViewListName = (TextView) findViewById(R.id.textViewListName);
 		textViewUsers = (TextView) findViewById(R.id.textViewListUsers);
 		editTextItemToAdd = (EditText) findViewById(R.id.editTextItem);
-		launchGetListByIdTask(DEMO_LIST_ID);
-		createHandlerToGetListEveryFewSeconds(DEMO_LIST_ID);
+		String listId = getIntent().getExtras().getString(ConstService.BUNDLE_LIST_ID);
+		launchGetListByIdTask(listId);
+		createHandlerToGetListEveryFewSeconds(listId);
 	}
 
 	@Override
@@ -53,17 +53,13 @@ public class ShoppingListActivity extends AbsractAppActivity
 	public void buttonAddItemClicked(View view)
 	{
 		String itemToAdd = editTextItemToAdd.getText().toString();
-		launchAddItemToListTask(DEMO_LIST_ID, itemToAdd);
+		launchAddItemToListTask(shoppingList._id, itemToAdd);
 		editTextItemToAdd.setText("");
 	}
 	
 	public void listWasUpdated()
 	{
-		launchGetListByIdTask(DEMO_LIST_ID);
-	}
-
-	public ShoppingList getShoppingList() {
-		return shoppingList;
+		launchGetListByIdTask(shoppingList._id);
 	}
 
 	private void launchGetListByIdTask(String listId)
@@ -73,20 +69,27 @@ public class ShoppingListActivity extends AbsractAppActivity
 			@Override
 			public void onSuccess(JSONObject json) 
 			{
-				shoppingList = new ShoppingList();
-				try {
-					shoppingList.setName(json.getString(ConstService.LIST_NAME));
-					shoppingList.setItems(Utils.jsonArrayToList(json.getJSONArray(ConstService.LIST_ITEMS)));
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				shoppingList = new Gson().fromJson(json.toString(), ShoppingList.class);
+//				try {
+//					
+//					shoppingList.setName(json.getString(ConstService.LIST_NAME));
+//					shoppingList.setItems(Utils.jsonArrayToList(json.getJSONArray(ConstService.LIST_ITEMS)));
+//				} catch (JSONException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
 				textViewListName.setText(shoppingList.getName());
 				for (String item : shoppingList.getItems()) 
 				{
 					listViewItems.add(item);
 				}
+				
+				String users = "";
+				for (NoteContactInList contact : shoppingList.getUsers()) {
+					users += contact.getUserInfo().toString();
+				}
+				textViewUsers .setText(users);
 			}
 			
 			@Override

@@ -8,12 +8,10 @@ import org.apache.http.client.HttpResponseException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import RequestsAndServer.HttpGetRequest;
 import android.os.AsyncTask;
-import android.os.Handler;
 
-import com.example.noteversion1.activities.ShoppingListActivity;
 import com.example.noteversion1.utils.ConstService;
-import com.example.noteversion1.utils.HttpGetRequest;
 
 
 /**

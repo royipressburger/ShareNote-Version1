@@ -14,13 +14,12 @@
 
 
     <EditText
-        android:id="@+id/listName"
+        android:id="@+id/editTextlistName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="107dp"
-        android:hint="@string/listName"
+        android:hint="@string/listNamePromptMessage"
         android:ems="10" />
     
 
