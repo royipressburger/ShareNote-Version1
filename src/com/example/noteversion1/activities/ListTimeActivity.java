@@ -40,7 +40,7 @@ public class ListTimeActivity extends AbsractAppActivity
 	public void onButtonSetTimeClicked(View view)
 	{
 		//Get last reminder
-		int lastReminderInMinuts = Integer.parseInt(lastReminder.getText().toString());
+		int lastReminderInMinuts = lastReminder.getText().toString().isEmpty() ? 0 : Integer.parseInt(lastReminder.getText().toString());
 
 		listToCreate.setStartTime(Calendar.getInstance().getTimeInMillis());
 		listToCreate.setEndTime(getTimeInMilSecondsFromViews());

@@ -1,16 +1,20 @@
 package com.example.noteversion1.activities;
 
-import org.json.JSONException;
+import java.net.URI;
+
 import org.json.JSONObject;
 
 import AsyncTasks.AddItemToListTask;
 import AsyncTasks.GetShoppingListByIdTask;
 import AsyncTasks.GetShoppingListByIdTask.OnFinishedListener;
-import NoteObjects.NoteContact;
 import NoteObjects.NoteContactInList;
 import NoteObjects.ShoppingList;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -50,11 +54,17 @@ public class ShoppingListActivity extends AbsractAppActivity
 	{
 	}
 	
-	public void buttonAddItemClicked(View view)
+	public void onButtonAddItemClicked(View view)
 	{
 		String itemToAdd = editTextItemToAdd.getText().toString();
 		launchAddItemToListTask(shoppingList._id, itemToAdd);
 		editTextItemToAdd.setText("");
+	}
+	
+	public void onButtonCameraClicked(View view)
+	{
+		 Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+		 startActivityForResult(intent, 0);
 	}
 	
 	public void listWasUpdated()
