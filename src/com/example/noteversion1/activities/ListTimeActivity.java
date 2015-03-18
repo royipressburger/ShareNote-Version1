@@ -47,7 +47,7 @@ public class ListTimeActivity extends AbsractAppActivity
 	@Override
 	public void onButtonNextClicked() 
 	{
-		Intent i = new Intent(getApplicationContext(), SelectUsersActivity.class);
+		Intent i = new Intent(getApplicationContext(), ShoppingListActivity.class);
 		startActivity(i);
 	}
 }

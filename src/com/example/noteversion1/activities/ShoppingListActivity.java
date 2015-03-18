@@ -38,7 +38,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 		textViewListName = (TextView) findViewById(R.id.textViewListName);
 		textViewUsers = (TextView) findViewById(R.id.textViewListUsers);
 		editTextItemToAdd = (EditText) findViewById(R.id.editTextItem);
-//		launchGetListByIdTask("2");
+		launchGetListByIdTask("2");
 		//new AddItemToListTask().execute("2", "fish");
 	}
 
