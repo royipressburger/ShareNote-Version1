@@ -6,11 +6,10 @@ import java.net.URISyntaxException;
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 
+import RequestsAndServer.HttpPostRequest;
 import android.os.AsyncTask;
 
-import com.example.noteversion1.activities.ShoppingListActivity;
 import com.example.noteversion1.utils.ConstService;
-import com.example.noteversion1.utils.HttpPostRequest;
 
 public class AddItemToListTask extends AsyncTask<String, Void, Boolean>
 {

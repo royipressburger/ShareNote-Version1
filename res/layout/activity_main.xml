@@ -12,19 +12,19 @@
     	android:layout_centerHorizontal="true"/>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/buttonCreateNewList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="New"
-        android:onClick="createNewList"/>
+        android:onClick="startCreateListFlow"/>
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/listViewMyLists"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button1" >
+        android:layout_below="@+id/buttonCreateNewList" >
 
     </ListView>
     

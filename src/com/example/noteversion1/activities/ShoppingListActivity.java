@@ -1,33 +1,34 @@
 package com.example.noteversion1.activities;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import AsyncTasks.AddItemToListTask;
 import AsyncTasks.GetShoppingListByIdTask;
 import AsyncTasks.GetShoppingListByIdTask.OnFinishedListener;
+import NoteObjects.NoteContactInList;
+import NoteObjects.ShoppingList;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.noteversion1.R;
 import com.example.noteversion1.utils.ConstService;
 import com.example.noteversion1.utils.MyListView;
-import com.example.noteversion1.utils.ShoppingList;
 import com.example.noteversion1.utils.Utils;
+import com.google.gson.Gson;
 
 public class ShoppingListActivity extends AbsractAppActivity 
 {
-	private static MyListView<String> listViewItems;
-	private static TextView textViewListName;
+	private MyListView<String> listViewItems;
+	private TextView textViewListName;
 	private TextView textViewUsers;
 	private EditText editTextItemToAdd;
 	
-	private static ShoppingList shoppingList;
+	private ShoppingList shoppingList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -38,69 +39,73 @@ public class ShoppingListActivity extends AbsractAppActivity
 		textViewListName = (TextView) findViewById(R.id.textViewListName);
 		textViewUsers = (TextView) findViewById(R.id.textViewListUsers);
 		editTextItemToAdd = (EditText) findViewById(R.id.editTextItem);
-		launchGetListByIdTask("2");
-		//new AddItemToListTask().execute("2", "fish");
+		String listId = getIntent().getExtras().getString(ConstService.BUNDLE_LIST_ID);
+		launchGetListByIdTask(listId);
+		createHandlerToGetListEveryFewSeconds(listId);
 	}
 
 	@Override
 	public void onButtonNextClicked() 
 	{
-		
 	}
 	
-	public void buttonAddItemClicked(View view)
+	public void onButtonAddItemClicked(View view)
 	{
 		String itemToAdd = editTextItemToAdd.getText().toString();
-		launchAddItemToListTask("2", itemToAdd);
+		launchAddItemToListTask(shoppingList._id, itemToAdd);
 		editTextItemToAdd.setText("");
-		
+	}
+	
+	public void onButtonCameraClicked(View view)
+	{
+		 Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+		 startActivityForResult(intent, 0);
 	}
 	
 	public void listWasUpdated()
 	{
-		launchGetListByIdTask("2");
+		launchGetListByIdTask(shoppingList._id);
 	}
 
-	public ShoppingList getShoppingList() {
-		return shoppingList;
-	}
-
-	private static void launchGetListByIdTask(String listId)
+	private void launchGetListByIdTask(String listId)
 	{
 		GetShoppingListByIdTask.OnFinishedListener onFinishedListener = new OnFinishedListener() {
 			
 			@Override
 			public void onSuccess(JSONObject json) 
 			{
-				shoppingList = new ShoppingList();
-				try {
-					shoppingList.setName(json.getString(ConstService.LIST_NAME));
-					shoppingList.setItems(Utils.jsonArrayToList(json.getJSONArray(ConstService.LIST_ITEMS)));
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				shoppingList = new Gson().fromJson(json.toString(), ShoppingList.class);
+//				try {
+//					
+//					shoppingList.setName(json.getString(ConstService.LIST_NAME));
+//					shoppingList.setItems(Utils.jsonArrayToList(json.getJSONArray(ConstService.LIST_ITEMS)));
+//				} catch (JSONException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
 				textViewListName.setText(shoppingList.getName());
 				for (String item : shoppingList.getItems()) 
 				{
 					listViewItems.add(item);
 				}
+				
+				String users = "";
+				for (NoteContactInList contact : shoppingList.getUsers()) {
+					users += contact.getUserInfo().toString();
+				}
+				textViewUsers .setText(users);
 			}
 			
 			@Override
 			public void onError() 
 			{
-				System.out.println("Cannot get list");
+				Utils.toastMessage("Cannot get list", getApplicationContext());
 			}
 		};
 		
 		GetShoppingListByIdTask task = new GetShoppingListByIdTask(onFinishedListener);
 		task.execute(listId);
-	}
-	
-	public static void getUpdatedListFromServer(String listId){
-		launchGetListByIdTask(listId);
 	}
 	
 	private void launchAddItemToListTask(String listId, String itemToAdd)
@@ -116,7 +121,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 			@Override
 			public void onError() 
 			{
-				toastMessage("Cannot add item")	;
+				Utils.toastMessage("Cannot add item", getApplicationContext());
 			}
 		};
 		
@@ -124,10 +129,15 @@ public class ShoppingListActivity extends AbsractAppActivity
 		task.execute(listId, itemToAdd);
 	}
 	
-	private void toastMessage(String message)
+	private void createHandlerToGetListEveryFewSeconds(final String listId)
 	{
-		CharSequence text = message;
-		Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-		toast.show();
+		new Handler().postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				launchGetListByIdTask(listId);
+			}
+		}, 10000);
 	}
 }

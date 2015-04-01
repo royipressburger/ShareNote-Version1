@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/yellow"
     tools:context="${relativePackage}.${activityClass}" >
 
     <TextView
@@ -57,6 +58,17 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:text="Add" 
-        android:onClick="buttonAddItemClicked"/>
+        android:onClick="onButtonAddItemClicked"/>
+
+    <Button
+        android:id="@+id/buttonCamera"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonAddItem"
+        android:layout_alignBottom="@+id/buttonAddItem"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_action_camera"
+        android:onClick="onButtonCameraClicked" />
 
 </RelativeLayout>

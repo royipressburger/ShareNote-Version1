@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.noteversion1.activities.RegisterActivity" >
+
+    <TextView
+        android:id="@+id/textViewEnterPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        android:text="Enter you phone with extension"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+        android:id="@+id/textViewPhoneCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewEnterPhone"
+        android:layout_alignBottom="@+id/editTextPhoneNumber"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <EditText
+        android:id="@+id/editTextPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewEnterPhone"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/textViewPhoneCode"
+        android:ems="10"
+        android:inputType="phone" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textViewNickName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewEnterPhone"
+        android:layout_centerVertical="true"
+        android:text="Nick name:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/editTextNickName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewEnterPhone"
+        android:layout_below="@+id/textViewNickName"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="36dp"
+        android:ems="10" 
+        android:inputType="text"/>
+
+</RelativeLayout>

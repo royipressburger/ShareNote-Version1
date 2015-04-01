@@ -8,12 +8,10 @@ import org.apache.http.client.HttpResponseException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import RequestsAndServer.HttpGetRequest;
 import android.os.AsyncTask;
-import android.os.Handler;
 
-import com.example.noteversion1.activities.ShoppingListActivity;
 import com.example.noteversion1.utils.ConstService;
-import com.example.noteversion1.utils.HttpGetRequest;
 
 
 /**
@@ -24,7 +22,6 @@ import com.example.noteversion1.utils.HttpGetRequest;
 public class GetShoppingListByIdTask extends AsyncTask<String, Void, JSONObject>
 {
 	private OnFinishedListener mCaller;
-//	private ShoppingListActivity lst;
 	
     public interface OnFinishedListener 
     {
@@ -82,13 +79,5 @@ public class GetShoppingListByIdTask extends AsyncTask<String, Void, JSONObject>
 		{
 			mCaller.onError();
 		}
-		new Handler().postDelayed(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				ShoppingListActivity.getUpdatedListFromServer("2");
-			}
-		}, 10000);
 	}
 }

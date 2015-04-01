@@ -49,4 +49,10 @@ public class MyListView<T>
 	public ArrayAdapter<T> getAdapter() {
 		return mAdapter;
 	}
+
+	public ListView getListView() {
+		return mListView;
+	}
+	
+	
 }
