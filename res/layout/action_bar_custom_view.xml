@@ -8,5 +8,6 @@
      <Button android:id="@+id/action_next_button"
           android:icon="@drawable/ic_action_next_item"
           android:title="@string/action_next"/>
+     
 
 </RelativeLayout>
