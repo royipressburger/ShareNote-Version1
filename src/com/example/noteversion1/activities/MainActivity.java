@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
 		myLists = new MyListView<ShoppingList>(this,
 				android.R.layout.simple_list_item_1, myListsView);
 		getMyLists();
-
+//		myListsView.setBackgroundColor(-16776961);
 		final Intent intent = new Intent(this, SetListNameActivity.class);
 		ImageView img = (ImageView) findViewById(R.id.image3);
 		img.setClickable(true);

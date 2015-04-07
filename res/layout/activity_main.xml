@@ -4,34 +4,15 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <Button
-        android:id="@+id/buttonCreateNewList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:onClick="startCreateListFlow"
-        android:text="New" />
-
-    <ImageView
-        android:id="@+id/image3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:paddingLeft="3sp"
-        android:paddingTop="3sp"
-        android:src="@drawable/new_list" />
 
     <ListView
         android:id="@+id/listViewMyLists"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonCreateNewList"
-        android:paddingTop="50sp"
-        android:background="@color/yellow" >
+        android:layout_alignParentLeft="true"
+        android:background="@color/yellow"
+        android:paddingTop="70sp" >
     </ListView>
-
 
     <ImageView
         android:id="@+id/image4"
@@ -41,5 +22,16 @@
         android:layout_centerHorizontal="true"
         android:paddingTop="3sp"
         android:src="@drawable/mustasch_bar" />
+
+    <ImageView
+        android:id="@+id/image3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/buttonCreateNewList"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:paddingRight="10sp"
+        android:paddingTop="30sp"
+        android:src="@drawable/new_list" />
 
 </RelativeLayout>
