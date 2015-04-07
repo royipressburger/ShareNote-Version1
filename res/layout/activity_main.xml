@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-
     <ListView
         android:id="@+id/listViewMyLists"
         android:layout_width="wrap_content"
@@ -33,5 +32,16 @@
         android:paddingRight="10sp"
         android:paddingTop="30sp"
         android:src="@drawable/new_list" />
+
+    <ImageView
+        android:id="@+id/image5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/buttonCreateNewList"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="10sp"
+        android:paddingTop="30sp"
+        android:src="@drawable/search_img" />
 
 </RelativeLayout>

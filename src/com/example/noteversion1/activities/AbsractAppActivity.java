@@ -1,13 +1,15 @@
 package com.example.noteversion1.activities;
 
-import com.example.noteversion1.R;
-
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.example.noteversion1.R;
 
 public abstract class AbsractAppActivity extends ActionBarActivity {
 
@@ -18,6 +20,10 @@ public abstract class AbsractAppActivity extends ActionBarActivity {
 		
 		ActionBar actionBar = getSupportActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
+	    @SuppressWarnings("deprecation")
+		BitmapDrawable background = new BitmapDrawable(BitmapFactory.decodeResource(getResources(), R.id.image4)); 
+//	    background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
+	    actionBar.setBackgroundDrawable(background);
 	}
 	
 	@Override
