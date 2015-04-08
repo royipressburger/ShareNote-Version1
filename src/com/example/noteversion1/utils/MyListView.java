@@ -9,7 +9,8 @@ import android.widget.ListView;
 public class MyListView<T>  
 {
 	private ArrayList<T> mItems;
-	private ArrayAdapter<T> mAdapter;
+//	private ArrayAdapter<T> mAdapter;
+	private MyArrayAdapter<T> mAdapter;
 	private ListView mListView;
 	
 	/**
@@ -18,11 +19,12 @@ public class MyListView<T>
 	 * @param layout - example (android.R.layout.simple_list_item_1)
 	 * @param listView - the id of the listView in the given activity.
 	 */
-	public MyListView(Activity contex, int layout, ListView listView)
+	public MyListView(Activity contex, int layout, ListView listView, int backgroundId)
 	{
 		mListView = listView;
 		mItems = new ArrayList<T>();
-		mAdapter = new ArrayAdapter<T>(contex, layout, mItems);
+//		mAdapter = new ArrayAdapter<T>(contex, layout, mItems);
+		mAdapter = new MyArrayAdapter<T>(contex, layout, mItems, backgroundId);
 		mListView.setAdapter(mAdapter);
 	}
 	

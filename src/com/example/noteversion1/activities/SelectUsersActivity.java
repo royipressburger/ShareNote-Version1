@@ -54,7 +54,7 @@ public class SelectUsersActivity extends AbsractAppActivity
 	@Override
 	public void onPostCreate(Bundle savedInstanceState) 
 	{
-		contacts = new MyListView<NoteContact>(this, android.R.layout.simple_list_item_multiple_choice, (ListView) findViewById(R.id.contactsList));
+		contacts = new MyListView<NoteContact>(this, android.R.layout.simple_list_item_multiple_choice, (ListView) findViewById(R.id.contactsList), 0);
 		
 		contacts.setChoiseMode(ListView.CHOICE_MODE_MULTIPLE);
 		

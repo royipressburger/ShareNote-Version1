@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
 		myListsView = (ListView) findViewById(R.id.listViewMyLists);
 		setListenerToList();
 		myLists = new MyListView<ShoppingList>(this,
-				android.R.layout.simple_list_item_1, myListsView);
+				android.R.layout.simple_list_item_1, myListsView, R.drawable.list_item);
 		getMyLists();
 //		myListsView.setBackgroundColor(-16776961);
 		final Intent intent = new Intent(this, SetListNameActivity.class);

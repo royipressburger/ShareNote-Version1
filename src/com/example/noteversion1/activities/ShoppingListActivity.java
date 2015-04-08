@@ -8,6 +8,7 @@ import AsyncTasks.GetShoppingListByIdTask.OnFinishedListener;
 import NoteObjects.NoteContactInList;
 import NoteObjects.ShoppingList;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -35,9 +36,13 @@ public class ShoppingListActivity extends AbsractAppActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shopping_list);
-		listViewItems = new MyListView<String>(this, android.R.layout.simple_expandable_list_item_1, (ListView) findViewById(R.id.listViewListItems));
+		listViewItems = new MyListView<String>(this, android.R.layout.simple_expandable_list_item_1, (ListView) findViewById(R.id.listViewListItems),0);
 		textViewListName = (TextView) findViewById(R.id.textViewListName);
 		textViewUsers = (TextView) findViewById(R.id.textViewListUsers);
+		//set font Calibri to text views
+		Typeface typeFace=Typeface.createFromAsset(getAssets(),"fonts/CALIBRI.TTF");
+		textViewListName.setTypeface(typeFace);
+		textViewUsers.setTypeface(typeFace);
 		editTextItemToAdd = (EditText) findViewById(R.id.editTextItem);
 		String listId = getIntent().getExtras().getString(ConstService.BUNDLE_LIST_ID);
 		launchGetListByIdTask(listId);

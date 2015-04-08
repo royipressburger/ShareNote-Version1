@@ -21,7 +21,7 @@ public abstract class AbsractAppActivity extends ActionBarActivity {
 		ActionBar actionBar = getSupportActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 	    @SuppressWarnings("deprecation")
-		BitmapDrawable background = new BitmapDrawable(BitmapFactory.decodeResource(getResources(), R.id.image4)); 
+		BitmapDrawable background = new BitmapDrawable(BitmapFactory.decodeResource(getResources(), R.drawable.mustasch_bar)); 
 //	    background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
 	    actionBar.setBackgroundDrawable(background);
 	}

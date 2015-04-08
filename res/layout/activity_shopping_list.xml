@@ -21,7 +21,8 @@
         android:layout_alignBaseline="@+id/textViewListName"
         android:layout_alignBottom="@+id/textViewListName"
         android:layout_centerHorizontal="true"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingTop="15sp" />
 
     <RelativeLayout 
     android:layout_width="match_parent"
@@ -33,7 +34,7 @@
       	 	android:id="@+id/listViewListItems"
         	android:layout_width="fill_parent"
        	 	android:layout_height="fill_parent"
-        	
+        	android:paddingTop="15sp"
         	android:layout_centerHorizontal="true" >
     	</ListView>
 	</RelativeLayout>
