@@ -2,6 +2,7 @@ package com.example.noteversion1.activities;
 
 import NoteObjects.ShoppingList;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.EditText;
 
@@ -19,6 +20,8 @@ public class SetListNameActivity extends AbsractAppActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_set_list_name);
 		editTextListName = (EditText) findViewById(R.id.editTextlistName);
+		Typeface typeFace=Typeface.createFromAsset(getAssets(),"fonts/CALIBRI.TTF");
+		editTextListName.setTypeface(typeFace);
 	}
 
 	@Override

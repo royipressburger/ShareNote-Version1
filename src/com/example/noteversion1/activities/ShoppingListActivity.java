@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import AsyncTasks.AddItemToListTask;
 import AsyncTasks.GetShoppingListByIdTask;
 import AsyncTasks.GetShoppingListByIdTask.OnFinishedListener;
-import NoteObjects.NoteContactInList;
 import NoteObjects.ShoppingList;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -96,10 +95,18 @@ public class ShoppingListActivity extends AbsractAppActivity
 				}
 				
 				String users = "";
-				for (NoteContactInList contact : shoppingList.getUsers()) {
-					users += contact.getUserInfo().toString();
+//				for (NoteContactInList contact : shoppingList.getUsers()) {
+//					users += contact.getUserInfo().toString();
+//				}
+				for (int i = 0; i < shoppingList.getUsers().size(); i++) {
+					if(i != (shoppingList.getUsers().size() - 1)){
+						users += shoppingList.getUsers().get(i).getUserInfo().toString()+", ";
+					}
+					else{
+						users += shoppingList.getUsers().get(i).getUserInfo().toString();
+					}
 				}
-				textViewUsers .setText(users);
+				textViewUsers.setText(users);
 			}
 			
 			@Override

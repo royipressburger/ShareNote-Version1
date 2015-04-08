@@ -59,6 +59,6 @@ public class ShoppingList implements Serializable
 	
 	public String toString() 
 	{
-		return String.format("Name: %s Open time: %S", name, (new SimpleDateFormat("MMM dd,yyyy HH:mm")).format(new Date(startTime)));
+		return String.format("%s, Opened on: %S", name, (new SimpleDateFormat("MMM dd,yyyy HH:mm")).format(new Date(startTime)));
 	}
 }

@@ -6,7 +6,7 @@
     <string name="LOGO">My Shared Note!</string>
     <string name="title_activity_create_list_screen">CreateListScreen</string>
     <string name="createList">Name Your List</string>
-    <string name="listNamePromptMessage">list name...</string>
+    <string name="listNamePromptMessage">name your list here...</string>
     <string name="title_activity_list_time">Share-Note MiLab</string>
     <string name="title_activity_select_users">SelectUsersActivity</string>
     <string name="action_settings">Settings</string>
