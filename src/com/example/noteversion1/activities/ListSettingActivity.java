@@ -1,6 +1,6 @@
 package com.example.noteversion1.activities;
 
-import com.example.noteversion1.R;
+import com.idc.milab.mrnote.R;
 
 import android.app.Activity;
 import android.os.Bundle;

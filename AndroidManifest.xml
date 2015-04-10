@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.noteversion1"
+    package="com.idc.milab.mrnote"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light" >
         <activity
-            android:name=".activities.RegisterActivity"
+            android:name="com.example.noteversion1.activities.RegisterActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,11 +27,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.example.noteversion1.activities.MainActivity"
             android:label="@string/title_activity_list_time" >
         </activity>
         <activity
-            android:name=".activities.SetListNameActivity"
+            android:name="com.example.noteversion1.activities.SetListNameActivity"
             android:label="@string/title_activity_create_list_screen"
             android:parentActivityName="com.example.noteversion1.activities.MainActivity" >
             <meta-data
@@ -39,14 +39,14 @@
                 android:value="com.example.noteversion1.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.ListTimeActivity"
+            android:name="com.example.noteversion1.activities.ListTimeActivity"
             android:label="@string/title_activity_list_time">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.noteversion1.SelectUsersActivity" />
         </activity>
         <activity
-            android:name=".activities.SelectUsersActivity"
+            android:name="com.example.noteversion1.activities.SelectUsersActivity"
             android:label="@string/title_activity_select_users"
             android:parentActivityName="com.example.noteversion1.activities.SetListNameActivity" >
             <meta-data
@@ -54,11 +54,11 @@
                 android:value="com.example.noteversion1.activities.SetListNameActivity" />
         </activity>
         <activity
-            android:name=".activities.ListSettingActivity"
+            android:name="com.example.noteversion1.activities.ListSettingActivity"
             android:label="@string/title_activity_list_setting" >
         </activity>
         <activity
-            android:name=".activities.ShoppingListActivity"
+            android:name="com.example.noteversion1.activities.ShoppingListActivity"
             android:label="@string/title_activity_shopping_list" >
         </activity>
         <activity

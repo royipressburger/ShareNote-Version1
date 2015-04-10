@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.noteversion1.R;
+import com.idc.milab.mrnote.R;
 import com.example.noteversion1.utils.ConstService;
 import com.example.noteversion1.utils.MyListView;
 import com.example.noteversion1.utils.Utils;

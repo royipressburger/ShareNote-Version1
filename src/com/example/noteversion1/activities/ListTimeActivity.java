@@ -11,7 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.example.noteversion1.R;
+import com.idc.milab.mrnote.R;
 import com.example.noteversion1.utils.ConstService;
 import com.google.gson.Gson;
 

@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.noteversion1.R;
+import com.idc.milab.mrnote.R;
 
 public abstract class AbsractAppActivity extends ActionBarActivity {
 

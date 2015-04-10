@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
-import com.example.noteversion1.R;
+import com.idc.milab.mrnote.R;
 import com.example.noteversion1.utils.Colors;
 import com.example.noteversion1.utils.ConstService;
 import com.example.noteversion1.utils.MyListView;

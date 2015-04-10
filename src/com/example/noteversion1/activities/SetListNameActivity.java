@@ -6,7 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.EditText;
 
-import com.example.noteversion1.R;
+import com.idc.milab.mrnote.R;
 import com.example.noteversion1.utils.ConstService;
 import com.example.noteversion1.utils.Utils;
 import com.google.gson.Gson;

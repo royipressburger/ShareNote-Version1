@@ -2,7 +2,7 @@ package com.example.noteversion1.utils;
 
 import java.util.ArrayList;
 
-import com.example.noteversion1.R;
+import com.idc.milab.mrnote.R;
 
 import android.content.Context;
 import android.graphics.Color;

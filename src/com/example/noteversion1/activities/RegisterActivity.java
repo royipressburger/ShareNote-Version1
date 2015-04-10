@@ -9,7 +9,7 @@ import android.telephony.TelephonyManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.noteversion1.R;
+import com.idc.milab.mrnote.R;
 import com.example.noteversion1.utils.ConstService;
 import com.example.noteversion1.utils.SharedPref;
 import com.example.noteversion1.utils.Utils;
