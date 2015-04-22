@@ -3,6 +3,7 @@ package NoteObjects;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,32 @@ public class ShoppingList implements Serializable
 	private List<NoteContactInList> users;
 	private int lastReminder;
 	public String _id;
-	
+
+	public String calculateTimeLeft() 
+	{
+		String textToReturn = null;
+		String date = (new SimpleDateFormat("dd/M")).format(new Date(getStartTime()));
+		long currentTime = Calendar.getInstance().getTimeInMillis();
+		long diff = getEndTime() - currentTime;
+		if (diff <= 0)
+		{
+			textToReturn = "Done";
+		}
+		else
+		{
+			if (diff / 3600000 > 0)
+			{
+				textToReturn = diff / 3600000 + "h";
+			}
+			else
+			{
+				textToReturn = diff / 60000 + "m";
+			}
+		}
+
+		return textToReturn + " " + date;
+	}
+
 	public ShoppingList()
 	{
 		items = new ArrayList<String>();
@@ -56,7 +82,7 @@ public class ShoppingList implements Serializable
 	public void setLastReminder(int lastReminder) {
 		this.lastReminder = lastReminder;
 	}
-	
+
 	public String toString() 
 	{
 		return String.format("%s, Opened on: %S", name, (new SimpleDateFormat("MMM dd,yyyy HH:mm")).format(new Date(startTime)));

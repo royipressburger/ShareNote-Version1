@@ -1,6 +1,11 @@
-package com.example.noteversion1.activities;
+package activities;
 
 import java.util.ArrayList;
+
+import utils.Colors;
+import utils.ConstService;
+import utils.MyListView;
+import utils.Utils;
 
 import NoteObjects.NoteContact;
 import NoteObjects.NoteContactInList;
@@ -17,10 +22,6 @@ import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
 import com.idc.milab.mrnote.R;
-import com.example.noteversion1.utils.Colors;
-import com.example.noteversion1.utils.ConstService;
-import com.example.noteversion1.utils.MyListView;
-import com.example.noteversion1.utils.Utils;
 import com.google.gson.Gson;
 
 public class SelectUsersActivity extends AbsractAppActivity 
@@ -68,7 +69,6 @@ public class SelectUsersActivity extends AbsractAppActivity
 	private ArrayList<NoteContact> getAllContacts()
 	{
 		String phoneNumber = null;
-		String email = null;
 		Uri CONTENT_URI = ContactsContract.Contacts.CONTENT_URI;
 		String _ID = ContactsContract.Contacts._ID;
 		String DISPLAY_NAME = ContactsContract.Contacts.DISPLAY_NAME;
@@ -76,9 +76,6 @@ public class SelectUsersActivity extends AbsractAppActivity
 		Uri PhoneCONTENT_URI = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
 		String Phone_CONTACT_ID = ContactsContract.CommonDataKinds.Phone.CONTACT_ID;
 		String NUMBER = ContactsContract.CommonDataKinds.Phone.NUMBER;
-		Uri EmailCONTENT_URI =  ContactsContract.CommonDataKinds.Email.CONTENT_URI;
-		String EmailCONTACT_ID = ContactsContract.CommonDataKinds.Email.CONTACT_ID;
-		String DATA = ContactsContract.CommonDataKinds.Email.DATA;
 		ContentResolver contentResolver = getContentResolver();
 		Cursor cursor = contentResolver.query(CONTENT_URI, null,null, null, null); 
 		ArrayList<NoteContact> contatcts = new ArrayList<NoteContact>();

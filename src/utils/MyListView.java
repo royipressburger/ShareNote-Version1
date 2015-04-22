@@ -1,4 +1,4 @@
-package com.example.noteversion1.utils;
+package utils;
 
 import java.util.ArrayList;
 
@@ -9,8 +9,8 @@ import android.widget.ListView;
 public class MyListView<T>  
 {
 	private ArrayList<T> mItems;
-//	private ArrayAdapter<T> mAdapter;
-	private MyArrayAdapter<T> mAdapter;
+	private ArrayAdapter<T> mAdapter;
+//	private MyArrayAdapter<T> mAdapter;
 	private ListView mListView;
 	
 	/**
@@ -23,11 +23,14 @@ public class MyListView<T>
 	{
 		mListView = listView;
 		mItems = new ArrayList<T>();
-//		mAdapter = new ArrayAdapter<T>(contex, layout, mItems);
-		mAdapter = new MyArrayAdapter<T>(contex, layout, mItems, backgroundId);
+		mAdapter = new ArrayAdapter<T>(contex, layout, mItems);
 		mListView.setAdapter(mAdapter);
 	}
 	
+	public ArrayList<T> getItems() {
+		return mItems;
+	}
+
 	/**
 	 * Adding the item
 	 * Also notify to the adapter.
@@ -48,10 +51,15 @@ public class MyListView<T>
 		mListView.setItemsCanFocus(false);
 	}
 
+	public void setAdapter(ArrayAdapter<T> mAdapter) {
+		this.mAdapter = mAdapter;
+		mListView.setAdapter(mAdapter);
+	}
+
 	public ArrayAdapter<T> getAdapter() {
 		return mAdapter;
 	}
-
+	
 	public ListView getListView() {
 		return mListView;
 	}

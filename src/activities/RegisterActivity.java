@@ -1,6 +1,8 @@
-package com.example.noteversion1.activities;
+package activities;
 
-import AsyncTasks.CreateNewUser;
+import utils.ConstService;
+import utils.SharedPref;
+import utils.Utils;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,11 +10,9 @@ import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import asyncTasks.CreateNewUser;
 
 import com.idc.milab.mrnote.R;
-import com.example.noteversion1.utils.ConstService;
-import com.example.noteversion1.utils.SharedPref;
-import com.example.noteversion1.utils.Utils;
 
 public class RegisterActivity extends AbsractAppActivity {
 

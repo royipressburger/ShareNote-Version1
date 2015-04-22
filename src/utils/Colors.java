@@ -1,4 +1,4 @@
-package com.example.noteversion1.utils;
+package utils;
 
 
 public enum Colors 

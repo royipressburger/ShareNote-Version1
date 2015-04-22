@@ -1,4 +1,4 @@
-package com.example.noteversion1.activities;
+package activities;
 
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -30,9 +30,13 @@ public abstract class AbsractAppActivity extends ActionBarActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    // Inflate the menu items for use in the action bar
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.abstract_activity_action_bar, menu);
+	    setLayoutToActionBar(menu);
 	    return super.onCreateOptionsMenu(menu);
+	}
+
+	protected void setLayoutToActionBar(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.abstract_activity_action_bar, menu);
 	}
 	
 	@Override

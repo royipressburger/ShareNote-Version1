@@ -1,8 +1,9 @@
-package com.example.noteversion1.activities;
+package activities;
 
 import java.util.Calendar;
 
-import AsyncTasks.CreateListTask;
+import utils.ConstService;
+
 import NoteObjects.ShoppingList;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +11,9 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import asyncTasks.CreateListTask;
 
 import com.idc.milab.mrnote.R;
-import com.example.noteversion1.utils.ConstService;
 import com.google.gson.Gson;
 
 public class ListTimeActivity extends AbsractAppActivity 

@@ -1,4 +1,4 @@
-package AsyncTasks;
+package asyncTasks;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -7,10 +7,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.noteversion1.utils.ConstService;
-
-import RequestsAndServer.HttpGetRequest;
-import RequestsAndServer.HttpPostRequest;
+import requestsAndServer.HttpPostRequest;
+import utils.ConstService;
 import android.os.AsyncTask;
 
 public class CreateNewUser extends AsyncTask<String, Void, String> 

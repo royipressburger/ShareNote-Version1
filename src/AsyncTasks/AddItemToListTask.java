@@ -1,4 +1,4 @@
-package AsyncTasks;
+package asyncTasks;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -6,10 +6,12 @@ import java.net.URISyntaxException;
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 
-import RequestsAndServer.HttpPostRequest;
+import requestsAndServer.HttpPostRequest;
+
+import utils.ConstService;
+
 import android.os.AsyncTask;
 
-import com.example.noteversion1.utils.ConstService;
 
 public class AddItemToListTask extends AsyncTask<String, Void, Boolean>
 {

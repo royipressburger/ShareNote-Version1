@@ -1,18 +1,17 @@
-package AsyncTasks;
+package asyncTasks;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 
+import requestsAndServer.HttpGetRequest;
+import utils.ConstService;
 import NoteObjects.ShoppingList;
-import RequestsAndServer.HttpGetRequest;
 import android.os.AsyncTask;
 
-import com.example.noteversion1.utils.ConstService;
 import com.google.gson.Gson;
 
 public class GetUserListsById extends AsyncTask<String, Void, List<ShoppingList>>

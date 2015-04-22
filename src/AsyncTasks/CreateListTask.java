@@ -1,4 +1,4 @@
-package AsyncTasks;
+package asyncTasks;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -6,11 +6,13 @@ import java.net.URISyntaxException;
 import org.apache.http.client.HttpResponseException;
 import org.json.JSONException;
 
-import com.example.noteversion1.utils.ConstService;
-import com.example.noteversion1.utils.Utils;
+import requestsAndServer.HttpPostRequest;
+
+import utils.ConstService;
+import utils.Utils;
+
 
 import NoteObjects.ShoppingList;
-import RequestsAndServer.HttpPostRequest;
 import android.os.AsyncTask;
 
 public class CreateListTask extends AsyncTask<ShoppingList, Void, String>

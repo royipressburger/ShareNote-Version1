@@ -1,4 +1,4 @@
-package com.example.noteversion1.activities;
+package activities;
 
 import com.idc.milab.mrnote.R;
 

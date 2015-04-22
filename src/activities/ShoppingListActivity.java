@@ -1,10 +1,11 @@
-package com.example.noteversion1.activities;
+package activities;
 
 import org.json.JSONObject;
 
-import AsyncTasks.AddItemToListTask;
-import AsyncTasks.GetShoppingListByIdTask;
-import AsyncTasks.GetShoppingListByIdTask.OnFinishedListener;
+import utils.ConstService;
+import utils.MyListView;
+import utils.Utils;
+
 import NoteObjects.ShoppingList;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -14,11 +15,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import asyncTasks.AddItemToListTask;
+import asyncTasks.GetShoppingListByIdTask;
+import asyncTasks.GetShoppingListByIdTask.OnFinishedListener;
 
 import com.idc.milab.mrnote.R;
-import com.example.noteversion1.utils.ConstService;
-import com.example.noteversion1.utils.MyListView;
-import com.example.noteversion1.utils.Utils;
 import com.google.gson.Gson;
 
 public class ShoppingListActivity extends AbsractAppActivity 
