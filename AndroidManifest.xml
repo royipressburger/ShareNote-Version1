@@ -32,38 +32,38 @@
         </activity>
         <activity
             android:name="activities.SetListNameActivity"
-            android:label="@string/title_activity_create_list_screen"
-            android:parentActivityName="activities.MainActivity" >
+            android:label="@string/title_activity_create_list_screen" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.noteversion1.activities.MainActivity" />
+                android:value="activities.MainActivity" />
         </activity>
         <activity
             android:name="activities.ListTimeActivity"
-            android:label="@string/title_activity_list_time">
+            android:label="@string/title_activity_list_time" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.noteversion1.SelectUsersActivity" />
+                android:value="activities.SelectUsersActivity" />
         </activity>
         <activity
             android:name="activities.SelectUsersActivity"
-            android:label="@string/title_activity_select_users"
-            android:parentActivityName="activities.SetListNameActivity" >
+            android:label="@string/title_activity_select_users" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.noteversion1.activities.SetListNameActivity" />
+                android:value="activities.SetListNameActivity" />
         </activity>
         <activity
             android:name="activities.ListSettingActivity"
             android:label="@string/title_activity_list_setting" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="activities.SelectUsersActivity" />
         </activity>
         <activity
             android:name="activities.ShoppingListActivity"
             android:label="@string/title_activity_shopping_list" >
-        </activity>
-        <activity
-            android:name="utils.MyArrayAdapter"
-            android:label="@string/title_activity_my_array_adapter" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="activities.MainActivity" />
         </activity>
     </application>
 

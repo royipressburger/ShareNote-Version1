@@ -1,9 +1,6 @@
 package activities;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import utils.ConstService;
@@ -11,9 +8,9 @@ import utils.MyListView;
 import NoteObjects.ShoppingList;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,7 +23,7 @@ import asyncTasks.GetUserListsById;
 
 import com.idc.milab.mrnote.R;
 
-public class MainActivity extends AbsractAppActivity {
+public class MainActivity extends ActionBarActivity {
 
 	MyListView<ShoppingList> myLists;
 	ListView myListsView;
@@ -35,6 +32,7 @@ public class MainActivity extends AbsractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		setActionBar();
 		myListsView = (ListView) findViewById(R.id.listViewMyLists);
 		setListenerToList();
 
@@ -44,13 +42,18 @@ public class MainActivity extends AbsractAppActivity {
 		getMyLists();
 	}
 
-	@Override
-	protected void setLayoutToActionBar(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main_activity_action_bar, menu);
+	private void setActionBar() 
+	{
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(false);
+		LayoutInflater mInflater = LayoutInflater.from(this);
+		View mCustomView = mInflater.inflate(R.layout.action_bar_main_layout, null);
+
+		actionBar.setCustomView(mCustomView);
+		actionBar.setDisplayShowCustomEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
-
-
 
 	public void startCreateListFlow(View view) {
 		Intent intent = new Intent(this, SetListNameActivity.class);
@@ -103,7 +106,7 @@ public class MainActivity extends AbsractAppActivity {
 	}
 
 	private void setListView() {
-		myLists = new MyListView<ShoppingList>(this, R.layout.main_list_item, myListsView, R.drawable.list_item);
+		myLists = new MyListView<ShoppingList>(this, R.layout.main_list_item, myListsView);
 		ArrayAdapter<ShoppingList> listAdapter = new ArrayAdapter<ShoppingList>(getApplicationContext(), R.layout.main_list_item, R.id.listItemListOpener, myLists.getItems())
 		{
 			@Override
@@ -131,8 +134,7 @@ public class MainActivity extends AbsractAppActivity {
 		myLists.setAdapter(listAdapter);
 	}
 
-	@Override
-	public void onButtonNextClicked() 
+	public void onButtonAddClicked(View v) 
 	{
 		Intent intent = new Intent(getApplicationContext(), SetListNameActivity.class);
 		startActivity(intent);		

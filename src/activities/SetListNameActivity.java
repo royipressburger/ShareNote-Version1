@@ -6,6 +6,7 @@ import NoteObjects.ShoppingList;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import com.idc.milab.mrnote.R;
@@ -25,7 +26,7 @@ public class SetListNameActivity extends AbsractAppActivity {
 	}
 
 	@Override
-	public void onButtonNextClicked() 
+	public void onButtonNextClicked(View v) 
 	{
 		String listName = editTextListName.getText().toString();
 		if (listName == null || listName.isEmpty() || listName.contains(getResources().getString(R.string.listNamePromptMessage)))
@@ -40,7 +41,7 @@ public class SetListNameActivity extends AbsractAppActivity {
 		intent.putExtra(ConstService.BUNDLE_NEW_LIST, new Gson().toJson(listToCreate));
 		startActivity(intent);
 	}
-	
+
 //	public void createList(View view){
 ////		MyListView newList = new MyListView(this,R.layout.abc_screen_simple,null);
 //		EditText editText = (EditText) findViewById(R.id.listName);

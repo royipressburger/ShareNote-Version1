@@ -36,7 +36,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shopping_list);
-		listViewItems = new MyListView<String>(this, android.R.layout.simple_expandable_list_item_1, (ListView) findViewById(R.id.listViewListItems),0);
+		listViewItems = new MyListView<String>(this, android.R.layout.simple_expandable_list_item_1, (ListView) findViewById(R.id.listViewListItems));
 		textViewListName = (TextView) findViewById(R.id.textViewListName);
 		textViewUsers = (TextView) findViewById(R.id.textViewListUsers);
 		//set font Calibri to text views
@@ -50,7 +50,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 	}
 
 	@Override
-	public void onButtonNextClicked() 
+	public void onButtonNextClicked(View v) 
 	{
 	}
 	

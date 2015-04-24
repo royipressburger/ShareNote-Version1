@@ -31,7 +31,10 @@ public class ShoppingList implements Serializable
 		{
 			if (diff / 3600000 > 0)
 			{
-				textToReturn = diff / 3600000 + "h";
+				if (diff / 86400000 > 0 )
+					textToReturn = diff / 86400000 + "d";
+				else
+					textToReturn = diff / 3600000 + "h";
 			}
 			else
 			{
@@ -39,7 +42,7 @@ public class ShoppingList implements Serializable
 			}
 		}
 
-		return textToReturn + " " + date;
+		return textToReturn.equals("Done") ? textToReturn : textToReturn + " " + date;
 	}
 
 	public ShoppingList()

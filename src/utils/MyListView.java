@@ -19,7 +19,7 @@ public class MyListView<T>
 	 * @param layout - example (android.R.layout.simple_list_item_1)
 	 * @param listView - the id of the listView in the given activity.
 	 */
-	public MyListView(Activity contex, int layout, ListView listView, int backgroundId)
+	public MyListView(Activity contex, int layout, ListView listView)
 	{
 		mListView = listView;
 		mItems = new ArrayList<T>();

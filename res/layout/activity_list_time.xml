@@ -4,62 +4,86 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <Button
-        android:id="@+id/buttonSetTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="37dp"
-        android:onClick="onButtonSetTimeClicked"
-        android:text="Set" />
-
     <TextView
         android:id="@+id/textViewListName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Closing time" />
+        android:text="Closing time"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewListName"
+        android:layout_centerHorizontal="true"
+        android:background="#EDEDFF"
+        android:orientation="horizontal" >
+
+        <NumberPicker
+            android:id="@+id/month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <NumberPicker
+            android:id="@+id/day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@android:color/black" />
+
+        <NumberPicker
+            android:id="@+id/hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <NumberPicker
+            android:id="@+id/minuts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewLastReminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/datePicker"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="30dp"
+        android:text="Last Reminder" />
 
     <EditText
         android:id="@+id/editTextReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonSetTime"
-        android:layout_alignLeft="@+id/buttonSetTime"
-        android:layout_marginBottom="27dp"
+        android:layout_alignBottom="@+id/textViewLastReminder"
+        android:layout_toRightOf="@+id/textViewLastReminder"
         android:inputType="number" >
-
         <requestFocus />
     </EditText>
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editTextReminder"
-        android:layout_alignBottom="@+id/editTextReminder"
-        android:layout_toLeftOf="@+id/buttonSetTime"
-        android:text="Last Reminder" />
+        android:layout_alignBottom="@+id/textViewLastReminder"
+        android:layout_toLeftOf="@+id/textViewLastReminder"
+        android:contentDescription="Bell"
+        android:src="@drawable/ic_bell" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
+    <Button
+        android:id="@+id/buttonSetTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewListName"
-        android:orientation="vertical" >
-
-        <TimePicker
-            android:id="@+id/listTimeEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <DatePicker
-            android:id="@+id/listDateEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false" />
-    </LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/yellow_button"
+        android:onClick="onButtonSetTimeClicked"
+        android:layout_marginBottom="20dp"
+        android:text="Set" />
 
 </RelativeLayout>

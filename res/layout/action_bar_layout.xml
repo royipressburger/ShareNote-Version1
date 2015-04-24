@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_yellow" >
+
+    <ImageButton
+        android:id="@+id/action_bar_item_prev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@null"
+        android:contentDescription="prevButton"
+        android:padding="5dp"
+        android:onClick="onActionBarPrevClicked"
+        android:src="@drawable/ic_action_back_item" />
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="Logo"
+        android:src="@drawable/mustasch" />
+
+    <ImageButton
+        android:id="@+id/action_bar_item_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@null"
+        android:contentDescription="NextButton"
+        android:padding="5dp"
+        android:onClick="onButtonNextClicked"
+        android:src="@drawable/ic_action_next_item" />
+
+</RelativeLayout>

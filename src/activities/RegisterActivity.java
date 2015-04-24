@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import asyncTasks.CreateNewUser;
@@ -49,7 +50,7 @@ public class RegisterActivity extends AbsractAppActivity {
 	}
 
 	@Override
-	public void onButtonNextClicked() 
+	public void onButtonNextClicked(View v) 
 	{
 		if (validateInputs())
 		{
