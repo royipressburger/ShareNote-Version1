@@ -5,9 +5,7 @@ import org.json.JSONObject;
 import utils.ConstService;
 import utils.MyListView;
 import utils.Utils;
-
 import NoteObjects.ShoppingList;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,8 +17,8 @@ import asyncTasks.AddItemToListTask;
 import asyncTasks.GetShoppingListByIdTask;
 import asyncTasks.GetShoppingListByIdTask.OnFinishedListener;
 
-import com.idc.milab.mrnote.R;
 import com.google.gson.Gson;
+import com.idc.milab.mrnote.R;
 
 public class ShoppingListActivity extends AbsractAppActivity 
 {
@@ -61,12 +59,6 @@ public class ShoppingListActivity extends AbsractAppActivity
 		editTextItemToAdd.setText("");
 	}
 	
-	public void onButtonCameraClicked(View view)
-	{
-		 Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-		 startActivityForResult(intent, 0);
-	}
-	
 	public void listWasUpdated()
 	{
 		launchGetListByIdTask(shoppingList._id);
@@ -80,15 +72,6 @@ public class ShoppingListActivity extends AbsractAppActivity
 			public void onSuccess(JSONObject json) 
 			{
 				shoppingList = new Gson().fromJson(json.toString(), ShoppingList.class);
-//				try {
-//					
-//					shoppingList.setName(json.getString(ConstService.LIST_NAME));
-//					shoppingList.setItems(Utils.jsonArrayToList(json.getJSONArray(ConstService.LIST_ITEMS)));
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				
 				textViewListName.setText(shoppingList.getName());
 				for (String item : shoppingList.getItems()) 
 				{
@@ -96,9 +79,6 @@ public class ShoppingListActivity extends AbsractAppActivity
 				}
 				
 				String users = "";
-//				for (NoteContactInList contact : shoppingList.getUsers()) {
-//					users += contact.getUserInfo().toString();
-//				}
 				for (int i = 0; i < shoppingList.getUsers().size(); i++) {
 					if(i != (shoppingList.getUsers().size() - 1)){
 						users += shoppingList.getUsers().get(i).getUserInfo().toString()+", ";

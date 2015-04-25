@@ -6,7 +6,6 @@ import utils.Colors;
 import utils.ConstService;
 import utils.MyListView;
 import utils.Utils;
-
 import NoteObjects.NoteContact;
 import NoteObjects.NoteContactInList;
 import NoteObjects.ShoppingList;
@@ -17,12 +16,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.SparseBooleanArray;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
-import com.idc.milab.mrnote.R;
 import com.google.gson.Gson;
+import com.idc.milab.mrnote.R;
 
 public class SelectUsersActivity extends AbsractAppActivity 
 {
@@ -55,7 +55,7 @@ public class SelectUsersActivity extends AbsractAppActivity
 	@Override
 	public void onPostCreate(Bundle savedInstanceState) 
 	{
-		contacts = new MyListView<NoteContact>(this, android.R.layout.simple_list_item_multiple_choice, (ListView) findViewById(R.id.contactsList), 0);
+		contacts = new MyListView<NoteContact>(this, android.R.layout.simple_list_item_multiple_choice, (ListView) findViewById(R.id.contactsList));
 		
 		contacts.setChoiseMode(ListView.CHOICE_MODE_MULTIPLE);
 		
@@ -116,7 +116,7 @@ public class SelectUsersActivity extends AbsractAppActivity
 	}
 
 	@Override
-	public void onButtonNextClicked() 
+	public void onButtonNextClicked(View view) 
 	{
 		Intent intent = new Intent(this, ListTimeActivity.class);
 		listToCreate.setUsers(getSelectedUsers());

@@ -24,7 +24,7 @@ public class HttpPostRequest extends AbstractHttpRequest
     {
     	addParamsToUrl();
     	httpPost.setURI(new URI(url));
-    	httpPost.addHeader("Content-Type", "application/json");
+    	httpPost.addHeader("Content-Type", "application/json; charset=utf-8");
     	httpPost.setEntity(new StringEntity(body));
     	response =  httpClient.execute(httpPost);
     }

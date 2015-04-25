@@ -1,17 +1,26 @@
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:paddingTop="40dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
     android:background="@drawable/note"
     tools:context="${relativePackage}.${activityClass}" >
 
+    
     <TextView
         android:id="@+id/textViewListName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -19,9 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 		android:layout_below="@+id/textViewListName"
-        android:layout_centerHorizontal="true"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:paddingTop="15sp" />
+		android:layout_alignParentLeft="true"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <RelativeLayout 
     android:layout_width="match_parent"
@@ -37,7 +45,6 @@
         	android:layout_centerHorizontal="true" >
     	</ListView>
 	</RelativeLayout>
-	
     <EditText
         android:id="@+id/editTextItem"
         android:layout_width="wrap_content"
@@ -59,16 +66,5 @@
         android:layout_alignParentLeft="true"
         android:text="Add" 
         android:onClick="onButtonAddItemClicked"/>
-
-    <Button
-        android:id="@+id/buttonCamera"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonAddItem"
-        android:layout_alignBottom="@+id/buttonAddItem"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/ic_action_camera"
-        android:onClick="onButtonCameraClicked" />
 
 </RelativeLayout>

@@ -45,6 +45,7 @@ public class RegisterActivity extends AbsractAppActivity {
 
 	private void launchMainWindow() 
 	{
+		finish();
 		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 		startActivity(intent);
 	}
