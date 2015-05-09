@@ -1,4 +1,4 @@
-package asyncTasks;
+package AsyncTasks;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -7,7 +7,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import requestsAndServer.HttpPostRequest;
+import RequestsAndServer.HttpPostRequest;
 import utils.ConstService;
 import android.os.AsyncTask;
 

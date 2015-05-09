@@ -5,6 +5,7 @@ import java.util.List;
 
 import utils.ConstService;
 import utils.MyListView;
+import utils.SharedPref;
 import NoteObjects.ShoppingList;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import asyncTasks.GetUserListsById;
+import AsyncTasks.GetUserListsById;
 
 import com.idc.milab.mrnote.R;
 
@@ -47,6 +48,8 @@ public class MainActivity extends ActionBarActivity {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
+//		getActionBar().setDisplayShowHomeEnabled(false);   //disable back button
+//		 getActionBar().setHomeButtonEnabled(false);
 		LayoutInflater mInflater = LayoutInflater.from(this);
 		View mCustomView = mInflater.inflate(R.layout.action_bar_main_layout, null);
 
@@ -86,7 +89,9 @@ public class MainActivity extends ActionBarActivity {
 		};
 
 		GetUserListsById task = new GetUserListsById(listener);
-		task.execute("someId");
+		String param = SharedPref.getSharedPrefsString(ConstService.PREF_PHONE_NUM, null);
+		
+		task.execute(param);
 	}
 
 	private void setListenerToList() {

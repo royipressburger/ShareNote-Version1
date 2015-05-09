@@ -1,4 +1,4 @@
-package requestsAndServer;
+package RequestsAndServer;
 
 import java.io.IOException;
 import java.net.URI;

@@ -13,9 +13,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import asyncTasks.AddItemToListTask;
-import asyncTasks.GetShoppingListByIdTask;
-import asyncTasks.GetShoppingListByIdTask.OnFinishedListener;
+import AsyncTasks.AddItemToListTask;
+import AsyncTasks.GetShoppingListByIdTask;
+import AsyncTasks.GetShoppingListByIdTask.OnFinishedListener;
 
 import com.google.gson.Gson;
 import com.idc.milab.mrnote.R;

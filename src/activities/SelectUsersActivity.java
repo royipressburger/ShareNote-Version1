@@ -9,12 +9,14 @@ import utils.Utils;
 import NoteObjects.NoteContact;
 import NoteObjects.NoteContactInList;
 import NoteObjects.ShoppingList;
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.telephony.PhoneNumberUtils;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ListView;
@@ -52,6 +54,7 @@ public class SelectUsersActivity extends AbsractAppActivity
 		});
 	}
 	
+	
 	@Override
 	public void onPostCreate(Bundle savedInstanceState) 
 	{
@@ -66,6 +69,7 @@ public class SelectUsersActivity extends AbsractAppActivity
 		
 		super.onPostCreate(savedInstanceState);
 	}
+	
 	private ArrayList<NoteContact> getAllContacts()
 	{
 		String phoneNumber = null;
@@ -94,6 +98,7 @@ public class SelectUsersActivity extends AbsractAppActivity
 					Cursor phoneCursor = contentResolver.query(PhoneCONTENT_URI, null, Phone_CONTACT_ID + " = ?", new String[] { contact_id }, null);
 					if (phoneCursor.moveToNext()) {
 						phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(NUMBER));
+//						phoneNumber = PhoneNumberUtils.formatNumberToE164(phoneNumber, "972");
 						contact.setPhone(phoneNumber);
 					}
 					phoneCursor.close();
@@ -144,7 +149,6 @@ public class SelectUsersActivity extends AbsractAppActivity
 				}
 		    }
 		}
-		
 		return selectedContats;
 	}
 }
