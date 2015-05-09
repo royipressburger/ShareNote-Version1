@@ -7,7 +7,6 @@ import utils.ConstService;
 import utils.MyListView;
 import utils.Utils;
 import NoteObjects.NoteContact;
-import NoteObjects.NoteContactInList;
 import NoteObjects.ShoppingList;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
@@ -124,27 +123,57 @@ public class SelectUsersActivity extends AbsractAppActivity
 	public void onButtonNextClicked(View view) 
 	{
 		Intent intent = new Intent(this, ListTimeActivity.class);
-		listToCreate.setUsers(getSelectedUsers());
+		ArrayList<NoteContact> selectedUsrs = getSelectedUsers();
+//		listToCreate.setUsers(getSelectedUsers());
+		listToCreate.setUsers(selectedUsrs);
 		intent.putExtra(ConstService.BUNDLE_NEW_LIST, new Gson().toJson(listToCreate));
 		startActivity(intent);
 	}
 
-	private ArrayList<NoteContactInList> getSelectedUsers() 
+//	private ArrayList<NoteContactInList> getSelectedUsers() 
+//	{
+//		SparseBooleanArray checked = contacts.getListView().getCheckedItemPositions();
+//		ArrayList<NoteContactInList> selectedContats = new ArrayList<NoteContactInList>();
+//		int color = 0;
+//		for (int i = 0; i < contacts.getListView().getAdapter().getCount(); i++) {
+//		    if (checked.get(i)) 
+//		    {
+//		    	try 
+//		    	{
+//					NoteContactInList contact = new NoteContactInList((NoteContact) contacts.getListView().getItemAtPosition(i), Utils.ColorsToAndroidColor(Colors.values()[color]));
+//					color++;
+//					selectedContats.add(contact);
+//				} 
+//		    	catch (Exception e) 
+//				{
+//					Utils.toastMessage(e.getMessage(), getApplicationContext());
+//				}
+//		    }
+//		}
+//		return selectedContats;
+//	}
+	@SuppressLint("NewApi")
+	private ArrayList<NoteContact> getSelectedUsers() 
 	{
 		SparseBooleanArray checked = contacts.getListView().getCheckedItemPositions();
-		ArrayList<NoteContactInList> selectedContats = new ArrayList<NoteContactInList>();
-		int color = 0;
+//		System.out.println("checked contacts list size " + contacts.getListView().getChecketemPosition());
+		ArrayList<NoteContact> selectedContats = new ArrayList<NoteContact>();
 		for (int i = 0; i < contacts.getListView().getAdapter().getCount(); i++) {
 		    if (checked.get(i)) 
 		    {
 		    	try 
 		    	{
-					NoteContactInList contact = new NoteContactInList((NoteContact) contacts.getListView().getItemAtPosition(i), Utils.ColorsToAndroidColor(Colors.values()[color]));
-					color++;
+					NoteContact contact = (NoteContact) contacts.getListView().getItemAtPosition(i);
+					System.out.println("contact name is  " + contact.getName());
+					System.out.println("contact phone is " + contact.getPhone());
+					contact.setPhone(PhoneNumberUtils.formatNumberToE164(contact.getPhone(), "IL"));
+					System.out.println("contact phone after format is " + contact.getPhone());
 					selectedContats.add(contact);
+					System.out.println("after added contact");
 				} 
 		    	catch (Exception e) 
 				{
+		    		System.out.println("catched");
 					Utils.toastMessage(e.getMessage(), getApplicationContext());
 				}
 		    }

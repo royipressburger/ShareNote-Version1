@@ -68,7 +68,7 @@ public class RegisterActivity extends AbsractAppActivity {
 	@SuppressLint("NewApi")
 	private void createNewUser() 
 	{
-		final String phone = PhoneNumberUtils.formatNumberToE164(phoneCode.getText().toString() + phoneNumber.getText().toString(), "972"); 
+		final String phone = PhoneNumberUtils.formatNumberToE164(phoneCode.getText().toString() + phoneNumber.getText().toString(), "IL"); 
 		String nick = nickName.getText().toString();
 		String android_id = Secure.getString(getApplicationContext().getContentResolver(),Secure.ANDROID_ID); 
 		CreateNewUser.OnFinishedListener listenner = new CreateNewUser.OnFinishedListener() 
