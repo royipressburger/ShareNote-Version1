@@ -32,12 +32,13 @@ public class Utils
 	{
 		JSONObject json = new JSONObject(new Gson().toJson(listToCreate));
 		JSONArray usersArray = json.getJSONArray(ConstService.LIST_USERS);
+		System.out.println("in util user array before remove" + usersArray.toString());
 		json.remove("_id");
-		for (int i = 0; i < usersArray.length(); i++) 
-		{
-			usersArray.getJSONObject(i).remove("name");
-		}
-		
+//		for (int i = 0; i < usersArray.length(); i++) 
+//		{
+//			usersArray.getJSONObject(i).remove("name");
+//		}
+		System.out.println("in util json after remove" + json.toString());
 		return json.toString();
 	}
 	
