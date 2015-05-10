@@ -2,9 +2,9 @@ package activities;
 
 import java.util.ArrayList;
 
-import utils.Colors;
 import utils.ConstService;
 import utils.MyListView;
+import utils.SharedPref;
 import utils.Utils;
 import NoteObjects.NoteContact;
 import NoteObjects.ShoppingList;
@@ -97,7 +97,6 @@ public class SelectUsersActivity extends AbsractAppActivity
 					Cursor phoneCursor = contentResolver.query(PhoneCONTENT_URI, null, Phone_CONTACT_ID + " = ?", new String[] { contact_id }, null);
 					if (phoneCursor.moveToNext()) {
 						phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(NUMBER));
-//						phoneNumber = PhoneNumberUtils.formatNumberToE164(phoneNumber, "972");
 						contact.setPhone(phoneNumber);
 					}
 					phoneCursor.close();
@@ -124,39 +123,15 @@ public class SelectUsersActivity extends AbsractAppActivity
 	{
 		Intent intent = new Intent(this, ListTimeActivity.class);
 		ArrayList<NoteContact> selectedUsrs = getSelectedUsers();
-//		listToCreate.setUsers(getSelectedUsers());
 		listToCreate.setUsers(selectedUsrs);
 		intent.putExtra(ConstService.BUNDLE_NEW_LIST, new Gson().toJson(listToCreate));
 		startActivity(intent);
 	}
 
-//	private ArrayList<NoteContactInList> getSelectedUsers() 
-//	{
-//		SparseBooleanArray checked = contacts.getListView().getCheckedItemPositions();
-//		ArrayList<NoteContactInList> selectedContats = new ArrayList<NoteContactInList>();
-//		int color = 0;
-//		for (int i = 0; i < contacts.getListView().getAdapter().getCount(); i++) {
-//		    if (checked.get(i)) 
-//		    {
-//		    	try 
-//		    	{
-//					NoteContactInList contact = new NoteContactInList((NoteContact) contacts.getListView().getItemAtPosition(i), Utils.ColorsToAndroidColor(Colors.values()[color]));
-//					color++;
-//					selectedContats.add(contact);
-//				} 
-//		    	catch (Exception e) 
-//				{
-//					Utils.toastMessage(e.getMessage(), getApplicationContext());
-//				}
-//		    }
-//		}
-//		return selectedContats;
-//	}
 	@SuppressLint("NewApi")
 	private ArrayList<NoteContact> getSelectedUsers() 
 	{
 		SparseBooleanArray checked = contacts.getListView().getCheckedItemPositions();
-//		System.out.println("checked contacts list size " + contacts.getListView().getChecketemPosition());
 		ArrayList<NoteContact> selectedContats = new ArrayList<NoteContact>();
 		for (int i = 0; i < contacts.getListView().getAdapter().getCount(); i++) {
 		    if (checked.get(i)) 
@@ -164,20 +139,19 @@ public class SelectUsersActivity extends AbsractAppActivity
 		    	try 
 		    	{
 					NoteContact contact = (NoteContact) contacts.getListView().getItemAtPosition(i);
-					System.out.println("contact name is  " + contact.getName());
-					System.out.println("contact phone is " + contact.getPhone());
 					contact.setPhone(PhoneNumberUtils.formatNumberToE164(contact.getPhone(), "IL"));
-					System.out.println("contact phone after format is " + contact.getPhone());
 					selectedContats.add(contact);
-					System.out.println("after added contact");
 				} 
 		    	catch (Exception e) 
 				{
-		    		System.out.println("catched");
 					Utils.toastMessage(e.getMessage(), getApplicationContext());
 				}
 		    }
 		}
+		NoteContact self = new NoteContact();
+		self.setName("Me");
+		self.setPhone(PhoneNumberUtils.formatNumberToE164((SharedPref.getSharedPrefsString(ConstService.PREF_PHONE_NUM, "0")), "IL"));
+		selectedContats.add(self);
 		return selectedContats;
 	}
 }

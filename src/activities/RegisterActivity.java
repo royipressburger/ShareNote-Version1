@@ -78,7 +78,6 @@ public class RegisterActivity extends AbsractAppActivity {
 			{
 				Utils.toastMessage("User Added", getApplicationContext());
 				SharedPref.setSharedPrefsString(ConstService.PREF_USER_ID, result);
-//				SharedPref.setSharedPrefsString(ConstService.PREF_USER_ID, result);
 				SharedPref.setSharedPrefsString(ConstService.PREF_PHONE_NUM, phone);
 				launchMainWindow();
 			}

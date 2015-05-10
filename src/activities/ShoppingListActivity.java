@@ -36,8 +36,6 @@ public class ShoppingListActivity extends AbsractAppActivity
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		System.out.println("**********");
-		System.out.println(getIntent().getExtras().getString(ConstService.BUNDLE_NEW_LIST));
 		
 		setContentView(R.layout.activity_shopping_list);
 		listViewItems = new MyListView<String>(this, android.R.layout.simple_expandable_list_item_1, (ListView) findViewById(R.id.listViewListItems));
@@ -86,22 +84,14 @@ public class ShoppingListActivity extends AbsractAppActivity
 				
 				String users = "";
 				ArrayList<NoteContact> usersList = shoppingList.getUsers();
-				System.out.println("shoppint list users length " + usersList.size());
-				System.out.println("users are " + usersList.toString());
 				for (int i = 0; i < usersList.size(); i++) {
-					System.out.println("66666666666");
-					System.out.println("user in index i " + shoppingList.getUsers().get(i));
 					if(i != (usersList.size() - 1)){
-//						users += shoppingList.getUsers().get(i).getUserInfo().toString()+", ";
 						users += usersList.get(i).toString()+", ";
 					}
 					else{
-//						users += shoppingList.getUsers().get(i).getUserInfo().toString();
 						users += usersList.get(i).toString();
 					}
 				}
-				System.out.println("7777777777777777777777777777777777777777777777777777777777777777777777777777");
-				System.out.println(users);
 				textViewUsers.setText(users);
 			}
 			
