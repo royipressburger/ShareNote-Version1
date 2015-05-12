@@ -46,10 +46,10 @@ public class MainActivity extends ActionBarActivity {
 	private void setActionBar() 
 	{
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayShowHomeEnabled(false);
+//		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
 //		getActionBar().setDisplayShowHomeEnabled(false);   //disable back button
-//		 getActionBar().setHomeButtonEnabled(false);
+//		actionBar.setHomeButtonEnabled(false);
 		LayoutInflater mInflater = LayoutInflater.from(this);
 		View mCustomView = mInflater.inflate(R.layout.action_bar_main_layout, null);
 
