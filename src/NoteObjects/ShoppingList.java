@@ -13,7 +13,8 @@ public class ShoppingList implements Serializable
 	private long startTime;
 	private long endTime;
 	private List<String> items;
-	private List<NoteContactInList> users;
+//	private List<NoteContactInList> users;
+	private ArrayList<NoteContact> users;
 	private int lastReminder;
 	public String _id;
 
@@ -73,10 +74,19 @@ public class ShoppingList implements Serializable
 	public void setItems(List<String> items) {
 		this.items = items;
 	}
-	public List<NoteContactInList> getUsers() {
+//	public List<NoteContactInList> getUsers() {
+//		return users;
+//	}
+	public ArrayList<NoteContact> getUsers() {
+		System.out.println("55555555555555555555555555555555555555555555555555");
+		System.out.println("shopping list class getUsers array length " + users.size());
+		System.out.println(users.toString());
 		return users;
 	}
-	public void setUsers(List<NoteContactInList> users) {
+//	public void setUsers(List<NoteContactInList> users) {
+//		this.users = users;
+//	}
+	public void setUsers(ArrayList<NoteContact> users) {
 		this.users = users;
 	}
 	public int getLastReminder() {

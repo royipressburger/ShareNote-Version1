@@ -2,19 +2,20 @@ package activities;
 
 import java.util.ArrayList;
 
-import utils.Colors;
 import utils.ConstService;
 import utils.MyListView;
+import utils.SharedPref;
 import utils.Utils;
 import NoteObjects.NoteContact;
-import NoteObjects.NoteContactInList;
 import NoteObjects.ShoppingList;
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.telephony.PhoneNumberUtils;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ListView;
@@ -52,6 +53,7 @@ public class SelectUsersActivity extends AbsractAppActivity
 		});
 	}
 	
+	
 	@Override
 	public void onPostCreate(Bundle savedInstanceState) 
 	{
@@ -66,6 +68,7 @@ public class SelectUsersActivity extends AbsractAppActivity
 		
 		super.onPostCreate(savedInstanceState);
 	}
+	
 	private ArrayList<NoteContact> getAllContacts()
 	{
 		String phoneNumber = null;
@@ -119,23 +122,24 @@ public class SelectUsersActivity extends AbsractAppActivity
 	public void onButtonNextClicked(View view) 
 	{
 		Intent intent = new Intent(this, ListTimeActivity.class);
-		listToCreate.setUsers(getSelectedUsers());
+		ArrayList<NoteContact> selectedUsrs = getSelectedUsers();
+		listToCreate.setUsers(selectedUsrs);
 		intent.putExtra(ConstService.BUNDLE_NEW_LIST, new Gson().toJson(listToCreate));
 		startActivity(intent);
 	}
 
-	private ArrayList<NoteContactInList> getSelectedUsers() 
+	@SuppressLint("NewApi")
+	private ArrayList<NoteContact> getSelectedUsers() 
 	{
 		SparseBooleanArray checked = contacts.getListView().getCheckedItemPositions();
-		ArrayList<NoteContactInList> selectedContats = new ArrayList<NoteContactInList>();
-		int color = 0;
+		ArrayList<NoteContact> selectedContats = new ArrayList<NoteContact>();
 		for (int i = 0; i < contacts.getListView().getAdapter().getCount(); i++) {
 		    if (checked.get(i)) 
 		    {
 		    	try 
 		    	{
-					NoteContactInList contact = new NoteContactInList((NoteContact) contacts.getListView().getItemAtPosition(i), Utils.ColorsToAndroidColor(Colors.values()[color]));
-					color++;
+					NoteContact contact = (NoteContact) contacts.getListView().getItemAtPosition(i);
+					contact.setPhone(PhoneNumberUtils.formatNumberToE164(contact.getPhone(), "IL"));
 					selectedContats.add(contact);
 				} 
 		    	catch (Exception e) 
@@ -144,7 +148,10 @@ public class SelectUsersActivity extends AbsractAppActivity
 				}
 		    }
 		}
-		
+		NoteContact self = new NoteContact();
+		self.setName("Me");
+		self.setPhone(PhoneNumberUtils.formatNumberToE164((SharedPref.getSharedPrefsString(ConstService.PREF_PHONE_NUM, "0")), "IL"));
+		selectedContats.add(self);
 		return selectedContats;
 	}
 	

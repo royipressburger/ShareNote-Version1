@@ -1,4 +1,4 @@
-package asyncTasks;
+package AsyncTasks;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 
-import requestsAndServer.HttpGetRequest;
+import RequestsAndServer.HttpGetRequest;
 import utils.ConstService;
 import NoteObjects.ShoppingList;
 import android.os.AsyncTask;

@@ -1,10 +1,16 @@
 package activities;
 
+import java.util.ArrayList;
+
 import org.json.JSONObject;
 
 import utils.ConstService;
 import utils.MyListView;
 import utils.Utils;
+import AsyncTasks.AddItemToListTask;
+import AsyncTasks.GetShoppingListByIdTask;
+import AsyncTasks.GetShoppingListByIdTask.OnFinishedListener;
+import NoteObjects.NoteContact;
 import NoteObjects.ShoppingList;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,9 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import asyncTasks.AddItemToListTask;
-import asyncTasks.GetShoppingListByIdTask;
-import asyncTasks.GetShoppingListByIdTask.OnFinishedListener;
 
 import com.google.gson.Gson;
 import com.idc.milab.mrnote.R;
@@ -34,6 +37,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_shopping_list);
 		listViewItems = new MyListView<String>(this, android.R.layout.simple_expandable_list_item_1, (ListView) findViewById(R.id.listViewListItems));
 		textViewListName = (TextView) findViewById(R.id.textViewListName);
@@ -84,12 +88,13 @@ public class ShoppingListActivity extends AbsractAppActivity
 				}
 
 				String users = "";
-				for (int i = 0; i < shoppingList.getUsers().size(); i++) {
-					if(i != (shoppingList.getUsers().size() - 1)){
-						users += shoppingList.getUsers().get(i).getUserInfo().toString()+", ";
+				ArrayList<NoteContact> usersList = shoppingList.getUsers();
+				for (int i = 0; i < usersList.size(); i++) {
+					if(i != (usersList.size() - 1)){
+						users += usersList.get(i).toString()+", ";
 					}
 					else{
-						users += shoppingList.getUsers().get(i).getUserInfo().toString();
+						users += usersList.get(i).toString();
 					}
 				}
 				textViewUsers.setText(users);

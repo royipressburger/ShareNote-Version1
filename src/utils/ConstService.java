@@ -11,6 +11,7 @@ public class ConstService
 	public static final String SERVER_CREATE_USER_SERVLET = "/createUser"; 
 	public static final String URL_PARAM_LIST_ID = "listid";
 	public static final String URL_PARAM_USERT_ID = "userid";
+	public static final String URL_PARAM_USER_PHONE = "phone";
 	
 	//JSON CONST
 	//LIST
@@ -27,4 +28,5 @@ public class ConstService
 	
 	public static final String PREF_USER_ID = "userid";
 	public static final String PREF_DEFAULT = "default";
+	public static final String PREF_PHONE_NUM = "phone";
 }

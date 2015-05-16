@@ -3,15 +3,17 @@ package activities;
 import utils.ConstService;
 import utils.SharedPref;
 import utils.Utils;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings.Secure;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import asyncTasks.CreateNewUser;
+import AsyncTasks.CreateNewUser;
 
 import com.idc.milab.mrnote.R;
 
@@ -63,9 +65,10 @@ public class RegisterActivity extends AbsractAppActivity {
 		}
 	}
 
+	@SuppressLint("NewApi")
 	private void createNewUser() 
 	{
-		String phone = phoneCode.getText().toString() + phoneNumber.getText().toString(); 
+		final String phone = PhoneNumberUtils.formatNumberToE164(phoneCode.getText().toString() + phoneNumber.getText().toString(), "IL"); 
 		String nick = nickName.getText().toString();
 		String android_id = Secure.getString(getApplicationContext().getContentResolver(),Secure.ANDROID_ID); 
 		CreateNewUser.OnFinishedListener listenner = new CreateNewUser.OnFinishedListener() 
@@ -75,6 +78,7 @@ public class RegisterActivity extends AbsractAppActivity {
 			{
 				Utils.toastMessage("User Added", getApplicationContext());
 				SharedPref.setSharedPrefsString(ConstService.PREF_USER_ID, result);
+				SharedPref.setSharedPrefsString(ConstService.PREF_PHONE_NUM, phone);
 				launchMainWindow();
 			}
 			

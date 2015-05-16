@@ -1,7 +1,7 @@
 package NoteObjects;
 
 
-public class NoteContactInList 
+public class NoteContactInList
 {
 	private NoteContact userInfo;
 	private int color;
