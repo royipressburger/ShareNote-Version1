@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewListName"
         android:layout_centerHorizontal="true"
-        android:background="#EDEDFF"
+        android:background="#EDEDEF"
         android:orientation="horizontal" >
 
         <NumberPicker
@@ -35,7 +35,9 @@
         <View
             android:layout_width="1dp"
             android:layout_height="fill_parent"
-            android:background="@android:color/black" />
+            android:background="#323234"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
 
         <NumberPicker
             android:id="@+id/hours"
@@ -64,6 +66,7 @@
         android:layout_alignBottom="@+id/textViewLastReminder"
         android:layout_toRightOf="@+id/textViewLastReminder"
         android:inputType="number" >
+
         <requestFocus />
     </EditText>
 
@@ -81,9 +84,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/yellow_button"
         android:onClick="onButtonSetTimeClicked"
-        android:layout_marginBottom="20dp"
         android:text="Set" />
 
 </RelativeLayout>

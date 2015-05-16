@@ -90,4 +90,9 @@ public class ShoppingList implements Serializable
 	{
 		return String.format("%s, Opened on: %S", name, (new SimpleDateFormat("MMM dd,yyyy HH:mm")).format(new Date(startTime)));
 	}
+	
+	public static int compare(ShoppingList list1, ShoppingList list2)
+	{
+		return (int) (list2.getStartTime() - list1.getStartTime());
+	}
 }

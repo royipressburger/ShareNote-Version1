@@ -147,4 +147,6 @@ public class SelectUsersActivity extends AbsractAppActivity
 		
 		return selectedContats;
 	}
+	
+	
 }

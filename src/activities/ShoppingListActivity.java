@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import asyncTasks.AddItemToListTask;
@@ -26,9 +27,9 @@ public class ShoppingListActivity extends AbsractAppActivity
 	private TextView textViewListName;
 	private TextView textViewUsers;
 	private EditText editTextItemToAdd;
-	
+
 	private ShoppingList shoppingList;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -37,6 +38,10 @@ public class ShoppingListActivity extends AbsractAppActivity
 		listViewItems = new MyListView<String>(this, android.R.layout.simple_expandable_list_item_1, (ListView) findViewById(R.id.listViewListItems));
 		textViewListName = (TextView) findViewById(R.id.textViewListName);
 		textViewUsers = (TextView) findViewById(R.id.textViewListUsers);
+
+		// Remove the next button from action bar
+		ImageButton button = ((ImageButton) findViewById(R.id.action_bar_item_next));
+		button.setVisibility(View.GONE);
 		//set font Calibri to text views
 		Typeface typeFace=Typeface.createFromAsset(getAssets(),"fonts/CALIBRI.TTF");
 		textViewListName.setTypeface(typeFace);
@@ -51,14 +56,14 @@ public class ShoppingListActivity extends AbsractAppActivity
 	public void onButtonNextClicked(View v) 
 	{
 	}
-	
+
 	public void onButtonAddItemClicked(View view)
 	{
 		String itemToAdd = editTextItemToAdd.getText().toString();
 		launchAddItemToListTask(shoppingList._id, itemToAdd);
 		editTextItemToAdd.setText("");
 	}
-	
+
 	public void listWasUpdated()
 	{
 		launchGetListByIdTask(shoppingList._id);
@@ -67,7 +72,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 	private void launchGetListByIdTask(String listId)
 	{
 		GetShoppingListByIdTask.OnFinishedListener onFinishedListener = new OnFinishedListener() {
-			
+
 			@Override
 			public void onSuccess(JSONObject json) 
 			{
@@ -77,7 +82,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 				{
 					listViewItems.add(item);
 				}
-				
+
 				String users = "";
 				for (int i = 0; i < shoppingList.getUsers().size(); i++) {
 					if(i != (shoppingList.getUsers().size() - 1)){
@@ -89,18 +94,18 @@ public class ShoppingListActivity extends AbsractAppActivity
 				}
 				textViewUsers.setText(users);
 			}
-			
+
 			@Override
 			public void onError() 
 			{
 				Utils.toastMessage("Cannot get list", getApplicationContext());
 			}
 		};
-		
+
 		GetShoppingListByIdTask task = new GetShoppingListByIdTask(onFinishedListener);
 		task.execute(listId);
 	}
-	
+
 	private void launchAddItemToListTask(String listId, String itemToAdd)
 	{
 		AddItemToListTask.OnFinishedListener onFinishedListener = new AddItemToListTask.OnFinishedListener() 
@@ -110,22 +115,22 @@ public class ShoppingListActivity extends AbsractAppActivity
 			{
 				listWasUpdated();
 			}
-			
+
 			@Override
 			public void onError() 
 			{
 				Utils.toastMessage("Cannot add item", getApplicationContext());
 			}
 		};
-		
+
 		AddItemToListTask task = new AddItemToListTask(onFinishedListener);
 		task.execute(listId, itemToAdd);
 	}
-	
+
 	private void createHandlerToGetListEveryFewSeconds(final String listId)
 	{
 		new Handler().postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub

@@ -34,11 +34,9 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		setActionBar();
 		myListsView = (ListView) findViewById(R.id.listViewMyLists);
+		
 		setListenerToList();
-
 		setListView();
-
-		myListsView.setDivider(null);
 		getMyLists();
 	}
 
@@ -64,24 +62,19 @@ public class MainActivity extends ActionBarActivity {
 		GetUserListsById.OnFinishedListener listener = new GetUserListsById.OnFinishedListener() {
 
 			@Override
-			public void onSuccess(List<ShoppingList> list) {
-				for (ShoppingList shoppingList : list) {
+			public void onSuccess(List<ShoppingList> list) 
+			{
+				for (ShoppingList shoppingList : list) 
+				{
 					myLists.add(shoppingList);
 				}
-
-				myLists.getAdapter().sort(new Comparator<ShoppingList>() {
-					@Override 
-					public int compare(ShoppingList arg1, ShoppingList arg0) 
-					{
-						return (int) (arg0.getStartTime() - arg1.getStartTime());
-					}
-				});
+				
+				sortLists();
 			}
 
 			@Override
 			public void onError() {
 				// TODO Auto-generated method stub
-
 			}
 		};
 
@@ -132,8 +125,20 @@ public class MainActivity extends ActionBarActivity {
 			}};
 
 		myLists.setAdapter(listAdapter);
+		myListsView.setDivider(null);
+		sortLists();
 	}
 
+	private void sortLists() {
+		myLists.getAdapter().sort(new Comparator<ShoppingList>() {
+			@Override 
+			public int compare(ShoppingList arg1, ShoppingList arg0) 
+			{
+				return ShoppingList.compare(arg1, arg0);
+			}
+		});
+	}
+	
 	public void onButtonAddClicked(View v) 
 	{
 		Intent intent = new Intent(getApplicationContext(), SetListNameActivity.class);

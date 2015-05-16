@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.NumberPicker.OnValueChangeListener;
 import asyncTasks.CreateListTask;
@@ -30,7 +31,7 @@ public class ListTimeActivity extends AbsractAppActivity
 	private NumberPicker day;
 	private NumberPicker month;
 	private String newListId;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -39,6 +40,10 @@ public class ListTimeActivity extends AbsractAppActivity
 		listToCreate = new Gson().fromJson(getIntent().getExtras().getString(ConstService.BUNDLE_NEW_LIST), ShoppingList.class);
 		lastReminder = (EditText) findViewById(R.id.editTextReminder);
 		createDateTimePicker();
+		
+		// Remove the next button from action bar
+		ImageButton button = ((ImageButton) findViewById(R.id.action_bar_item_next));
+		button.setVisibility(View.INVISIBLE);
 	}
 
 	private void createDateTimePicker() 
@@ -99,8 +104,6 @@ public class ListTimeActivity extends AbsractAppActivity
 	public void onButtonNextClicked(View v) 
 	{
 		Intent intent = new Intent(getApplicationContext(), ShoppingListActivity.class);
-		//TODO: Create List and wait for the Id from the server.
-		//createList();
 		intent.putExtra(ConstService.BUNDLE_LIST_ID, newListId);
 		startActivity(intent);
 	}
