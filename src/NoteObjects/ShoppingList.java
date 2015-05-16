@@ -13,7 +13,6 @@ public class ShoppingList implements Serializable
 	private long startTime;
 	private long endTime;
 	private List<String> items;
-//	private List<NoteContactInList> users;
 	private ArrayList<NoteContact> users;
 	private int lastReminder;
 	public String _id;
@@ -22,9 +21,8 @@ public class ShoppingList implements Serializable
 	{
 		String textToReturn = null;
 		String date = (new SimpleDateFormat("dd/M")).format(new Date(getStartTime()));
-		long currentTime = Calendar.getInstance().getTimeInMillis();
-		long diff = getEndTime() - currentTime;
-		if (diff <= 0)
+		long diff = getEndTime() - Calendar.getInstance().getTimeInMillis();
+		if (isDone())
 		{
 			textToReturn = "Done";
 		}
@@ -43,7 +41,12 @@ public class ShoppingList implements Serializable
 			}
 		}
 
-		return textToReturn.equals("Done") ? textToReturn : textToReturn + " " + date;
+		return textToReturn.equals("Done") ? textToReturn : textToReturn + " left " + date;
+	}
+	
+	public boolean isDone()
+	{
+		return (getEndTime() - Calendar.getInstance().getTimeInMillis()) <= 0;
 	}
 
 	public ShoppingList()
@@ -74,18 +77,14 @@ public class ShoppingList implements Serializable
 	public void setItems(List<String> items) {
 		this.items = items;
 	}
-//	public List<NoteContactInList> getUsers() {
-//		return users;
-//	}
+	
 	public ArrayList<NoteContact> getUsers() {
 		System.out.println("55555555555555555555555555555555555555555555555555");
 		System.out.println("shopping list class getUsers array length " + users.size());
 		System.out.println(users.toString());
 		return users;
 	}
-//	public void setUsers(List<NoteContactInList> users) {
-//		this.users = users;
-//	}
+	
 	public void setUsers(ArrayList<NoteContact> users) {
 		this.users = users;
 	}
@@ -103,6 +102,15 @@ public class ShoppingList implements Serializable
 	
 	public static int compare(ShoppingList list1, ShoppingList list2)
 	{
+		if (list1.isDone() && list2.isDone() || !list1.isDone() && !list2.isDone())
+			return (int) (list2.getStartTime() - list1.getStartTime());
+		
+		if(list1.isDone())
+			return 1;
+		
+		if (list2.isDone())
+			return -1;
+		
 		return (int) (list2.getStartTime() - list1.getStartTime());
 	}
 }

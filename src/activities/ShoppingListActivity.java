@@ -45,7 +45,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 
 		// Remove the next button from action bar
 		ImageButton button = ((ImageButton) findViewById(R.id.action_bar_item_next));
-		button.setVisibility(View.GONE);
+		button.setVisibility(View.INVISIBLE);
 		//set font Calibri to text views
 		Typeface typeFace=Typeface.createFromAsset(getAssets(),"fonts/CALIBRI.TTF");
 		textViewListName.setTypeface(typeFace);

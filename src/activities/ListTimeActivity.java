@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import utils.ConstService;
+import AsyncTasks.CreateListTask;
 import NoteObjects.ShoppingList;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.NumberPicker.OnValueChangeListener;
-import AsyncTasks.CreateListTask;
 
 import com.google.gson.Gson;
 import com.idc.milab.mrnote.R;
@@ -53,16 +53,20 @@ public class ListTimeActivity extends AbsractAppActivity
 		minuts.setMaxValue(59);
 		minuts.setMinValue(00);
 		minuts.setValue(cal.get(Calendar.MINUTE));
+		setDividerColor(minuts);
 		hours = (NumberPicker) findViewById(R.id.hours);
 		hours.setMaxValue(23);
 		hours.setMinValue(0);
 		hours.setValue(cal.get(Calendar.HOUR_OF_DAY));
+		setDividerColor(hours);
 		day = (NumberPicker) findViewById(R.id.day);
+		setDividerColor(day);
 		month = (NumberPicker) findViewById(R.id.month);
 		month.setMaxValue(11);
 		month.setMinValue(0);
 		month.setValue(cal.get(Calendar.MONTH));
 		month.setDisplayedValues(new DateFormatSymbols().getMonths());
+		setDividerColor(month);
 		MyOnValueChangeListener listner = new MyOnValueChangeListener(day, cal.get(Calendar.YEAR));
 		listner.onValueChange(month, 0, cal.get(Calendar.MONTH));
 		day.setValue(cal.get(Calendar.DAY_OF_MONTH));
@@ -129,6 +133,22 @@ public class ListTimeActivity extends AbsractAppActivity
 		CreateListTask task =  new CreateListTask(listener);
 		task.execute(listToCreate);
 	}
+	 private void setDividerColor (NumberPicker picker) {   
+
+	        java.lang.reflect.Field[] pickerFields = NumberPicker.class.getDeclaredFields();
+	        for (java.lang.reflect.Field pf : pickerFields) {
+	            if (pf.getName().equals("mSelectionDivider")) {
+	                pf.setAccessible(true);
+	                try {
+	                    pf.set(picker, getResources().getDrawable(R.color.app_grey));
+	                }
+	                catch (Exception e) {
+	                    e.printStackTrace();
+	                }
+	                break;
+	            }
+	        }
+	     }
 
 	private class MyOnValueChangeListener implements OnValueChangeListener
 	{

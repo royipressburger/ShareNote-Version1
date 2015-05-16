@@ -6,6 +6,7 @@ import java.util.List;
 import utils.ConstService;
 import utils.MyListView;
 import utils.SharedPref;
+import AsyncTasks.GetUserListsById;
 import NoteObjects.ShoppingList;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import AsyncTasks.GetUserListsById;
 
 import com.idc.milab.mrnote.R;
 
@@ -44,10 +44,9 @@ public class MainActivity extends ActionBarActivity {
 	private void setActionBar() 
 	{
 		ActionBar actionBar = getSupportActionBar();
-//		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
-//		getActionBar().setDisplayShowHomeEnabled(false);   //disable back button
-//		actionBar.setHomeButtonEnabled(false);
+		actionBar.setHomeButtonEnabled(false);
 		LayoutInflater mInflater = LayoutInflater.from(this);
 		View mCustomView = mInflater.inflate(R.layout.action_bar_main_layout, null);
 
