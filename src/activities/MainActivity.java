@@ -1,6 +1,8 @@
 package activities;
 
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import utils.ConstService;
@@ -117,11 +119,17 @@ public class MainActivity extends ActionBarActivity {
 				TextView endTime = (TextView) view.findViewById(R.id.listItemListDate);
 
 				//TODO: setOpner!
+				String date = (new SimpleDateFormat("dd/M")).format(new Date(item.getStartTime()));
 				String timeLeft = item.calculateTimeLeft();
 				if (timeLeft.equals("Done"))
 				{
 					((LinearLayout) view.findViewById(R.id.list_item_layout)).setBackgroundResource(R.drawable.list_item_done);
 				}
+				else
+				{
+					timeLeft = String.format("%s %s %s", timeLeft, "left", date);
+				}
+				
 				listName.setText(item.getName());
 				listOpener.setText("me");
 				endTime.setText(timeLeft);

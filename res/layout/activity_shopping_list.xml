@@ -1,50 +1,66 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp"
     android:layout_marginBottom="10dp"
-    android:paddingTop="40dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/note"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:background="@drawable/note"
+    android:paddingTop="40dp"
     tools:context="${relativePackage}.${activityClass}" >
 
-    
     <TextView
         android:id="@+id/textViewListName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_alignParentTop="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewListUsers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:layout_below="@+id/textViewListName"
-		android:layout_alignParentLeft="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewListName"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    <TextView
+        android:id="@+id/textViewTimeLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewListName"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewListName"
+        android:layout_toLeftOf="@+id/textViewTimeLeft"
+        android:contentDescription="Time left"
+        android:src="@drawable/time_left_icon" />
 
-    <RelativeLayout 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@+id/textViewListUsers"
-    android:layout_above="@+id/buttonAddItem"
-    tools:context="${relativePackage}.${activityClass}" >
-    	<ListView
-      	 	android:id="@+id/listViewListItems"
-        	android:layout_width="fill_parent"
-       	 	android:layout_height="fill_parent"
-        	android:paddingTop="15sp"
-        	android:layout_centerHorizontal="true" >
-    	</ListView>
-	</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttonAddItem"
+        android:layout_below="@+id/textViewListUsers"
+        tools:context="${relativePackage}.${activityClass}" >
+
+        <ListView
+            android:id="@+id/listViewListItems"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="15sp" >
+        </ListView>
+    </RelativeLayout>
+
     <EditText
         android:id="@+id/editTextItem"
         android:layout_width="wrap_content"
@@ -64,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="Add" 
-        android:onClick="onButtonAddItemClicked"/>
+        android:onClick="onButtonAddItemClicked"
+        android:text="Add" />
 
 </RelativeLayout>

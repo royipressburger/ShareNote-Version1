@@ -29,6 +29,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 	private MyListView<String> listViewItems;
 	private TextView textViewListName;
 	private TextView textViewUsers;
+	private TextView textViewTimeLeft;
 	private EditText editTextItemToAdd;
 
 	private ShoppingList shoppingList;
@@ -42,6 +43,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 		listViewItems = new MyListView<String>(this, android.R.layout.simple_expandable_list_item_1, (ListView) findViewById(R.id.listViewListItems));
 		textViewListName = (TextView) findViewById(R.id.textViewListName);
 		textViewUsers = (TextView) findViewById(R.id.textViewListUsers);
+		textViewTimeLeft = (TextView)findViewById(R.id.textViewTimeLeft);
 
 		// Remove the next button from action bar
 		ImageButton button = ((ImageButton) findViewById(R.id.action_bar_item_next));
@@ -91,13 +93,15 @@ public class ShoppingListActivity extends AbsractAppActivity
 				ArrayList<NoteContact> usersList = shoppingList.getUsers();
 				for (int i = 0; i < usersList.size(); i++) {
 					if(i != (usersList.size() - 1)){
-						users += usersList.get(i).toString()+", ";
+						users.concat(usersList.get(i).toString()+"|");
 					}
 					else{
-						users += usersList.get(i).toString();
+						users.concat(usersList.get(i).toString());
 					}
 				}
+				
 				textViewUsers.setText(users);
+				textViewTimeLeft.setText(shoppingList.calculateTimeLeft());
 			}
 
 			@Override

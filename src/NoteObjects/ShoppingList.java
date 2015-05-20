@@ -20,7 +20,7 @@ public class ShoppingList implements Serializable
 	public String calculateTimeLeft() 
 	{
 		String textToReturn = null;
-		String date = (new SimpleDateFormat("dd/M")).format(new Date(getStartTime()));
+		
 		long diff = getEndTime() - Calendar.getInstance().getTimeInMillis();
 		if (isDone())
 		{
@@ -41,7 +41,7 @@ public class ShoppingList implements Serializable
 			}
 		}
 
-		return textToReturn.equals("Done") ? textToReturn : textToReturn + " left " + date;
+		return textToReturn;
 	}
 	
 	public boolean isDone()
