@@ -1,17 +1,27 @@
 package activities;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+
+import org.apache.http.client.ClientProtocolException;
 
 import utils.ConstService;
 import AsyncTasks.CreateListTask;
+import NoteObjects.NoteContact;
 import NoteObjects.ShoppingList;
+import RequestsAndServer.HttpGetRequest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.gsm.SmsManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -81,6 +91,38 @@ public class ListTimeActivity extends AbsractAppActivity
 		listToCreate.setStartTime(Calendar.getInstance().getTimeInMillis());
 		listToCreate.setEndTime(getTimeInMilSecondsFromViews());
 		listToCreate.setLastReminder(lastReminderInMinuts);
+		
+		List<String> unsignedUsers = new ArrayList<String>();
+		for (NoteContact contact : listToCreate.getUsers()) {
+			HttpGetRequest request = new HttpGetRequest(ConstService.SERVER_URL + ConstService.SERVER_GET_UNSIGNED_USERS);
+			request.addParamerters(ConstService.URL_PARAM_USERT_ID, contact.getPhone());
+			
+			try {
+				request.execute();
+				String body = request.getResponseBody();
+				String[] lists = new Gson().fromJson(body, String[].class);
+				unsignedUsers = Arrays.asList(lists);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(unsignedUsers.size() == 0){
+				unsignedUsers.add(contact.getName());
+			}
+		}
+		SmsManager sms = SmsManager.getDefault();
+		String msg = "Helloooooo";
+		for (String string : unsignedUsers) {
+			sms.sendTextMessage(string, null, msg, null, null);
+		}
+//		sms.sendTextMessage("0546402664", null, msg, null, null);
+		System.out.println("after sms sending");
 
 		//Set will cause the list to be created.
 		createList();
