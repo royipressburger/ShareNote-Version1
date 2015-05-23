@@ -22,6 +22,7 @@ public class ConstService
 	public static final String USER_NAME = "name";
 	public static final String USER_PHONE = "phone";
 	public static final String USER_ANDROID_ID = "aid";
+	public static final String USER_REGESTRATION_ID = "regId";
 	
 	public static final String BUNDLE_NEW_LIST = "newList";
 	public static final String BUNDLE_LIST_ID = "listId";
@@ -29,4 +30,7 @@ public class ConstService
 	public static final String PREF_USER_ID = "userid";
 	public static final String PREF_DEFAULT = "default";
 	public static final String PREF_PHONE_NUM = "phone";
+	public static final String PREF_REGESTRATION_ID = "regid";
+	
+	public static final String APP_SENDER_ID = "1057836653958";
 }
