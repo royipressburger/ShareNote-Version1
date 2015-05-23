@@ -93,10 +93,10 @@ public class ShoppingListActivity extends AbsractAppActivity
 				ArrayList<NoteContact> usersList = shoppingList.getUsers();
 				for (int i = 0; i < usersList.size(); i++) {
 					if(i != (usersList.size() - 1)){
-						users.concat(usersList.get(i).toString()+"|");
+                        users += usersList.get(i).toString()+ " | ";
 					}
 					else{
-						users.concat(usersList.get(i).toString());
+                        users += usersList.get(i).toString();
 					}
 				}
 				

@@ -37,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		setActionBar();
 		myListsView = (ListView) findViewById(R.id.listViewMyLists);
-		
+
 		setListenerToList();
 		setListView();
 		getMyLists();
@@ -72,7 +72,7 @@ public class MainActivity extends ActionBarActivity {
 				{
 					myLists.add(shoppingList);
 				}
-				
+
 				sortLists();
 			}
 
@@ -84,7 +84,7 @@ public class MainActivity extends ActionBarActivity {
 
 		GetUserListsById task = new GetUserListsById(listener);
 		String param = SharedPref.getSharedPrefsString(ConstService.PREF_PHONE_NUM, null);
-		
+
 		task.execute(param);
 	}
 
@@ -106,8 +106,8 @@ public class MainActivity extends ActionBarActivity {
 
 	private void setListView() {
 		myLists = new MyListView<ShoppingList>(this, R.layout.main_list_item, myListsView);
-		ArrayAdapter<ShoppingList> listAdapter = new ArrayAdapter<ShoppingList>(getApplicationContext(), R.layout.main_list_item, R.id.listItemListOpener, myLists.getItems())
-		{
+		ArrayAdapter<ShoppingList> listAdapter = new ArrayAdapter<ShoppingList>(getApplicationContext(), R.id.listItemListOpener, myLists.getItems())
+				{
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
 				LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
@@ -129,16 +129,16 @@ public class MainActivity extends ActionBarActivity {
 				{
 					timeLeft = String.format("%s %s %s", timeLeft, "left", date);
 				}
-				
+
 				listName.setText(item.getName());
 				listOpener.setText("me");
 				endTime.setText(timeLeft);
 				return view;
 			}};
 
-		myLists.setAdapter(listAdapter);
-		myListsView.setDivider(null);
-		sortLists();
+			myLists.setAdapter(listAdapter);
+			myListsView.setDivider(null);
+			sortLists();
 	}
 
 	private void sortLists() {
@@ -150,7 +150,7 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 	}
-	
+
 	public void onButtonAddClicked(View v) 
 	{
 		Intent intent = new Intent(getApplicationContext(), SetListNameActivity.class);

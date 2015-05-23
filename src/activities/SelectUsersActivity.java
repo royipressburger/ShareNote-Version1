@@ -99,15 +99,8 @@ public class SelectUsersActivity extends AbsractAppActivity
 						phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(NUMBER));
 						contact.setPhone(phoneNumber);
 					}
-					phoneCursor.close();
 					
-					// Query and loop for every email of the contact
-//					Cursor emailCursor = contentResolver.query(EmailCONTENT_URI,    null, EmailCONTACT_ID+ " = ?", new String[] { contact_id }, null);
-//					if (emailCursor.moveToNext()) {
-//						email = emailCursor.getString(emailCursor.getColumnIndex(DATA));
-//						contact.email = email;
-//					}
-//					emailCursor.close();
+					phoneCursor.close();
 				}
 				
 				if (contact.getName() != null && contact.getPhone() != null)
@@ -154,6 +147,4 @@ public class SelectUsersActivity extends AbsractAppActivity
 		selectedContats.add(self);
 		return selectedContats;
 	}
-	
-	
 }
