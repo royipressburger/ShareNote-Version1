@@ -7,20 +7,19 @@ import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 
-import RequestsAndServer.HttpGetRequest;
 import utils.ConstService;
-import NoteObjects.ShoppingList;
+import RequestsAndServer.HttpGetRequest;
 import android.os.AsyncTask;
 
 import com.google.gson.Gson;
 
-public class UnsignedUsers extends AsyncTask<String, Void, List<ShoppingList>>
-{
-	private OnFinishedListener caller;
+public class UnsignedUsers extends AsyncTask<String, Void, List<String>>{
+	
+private OnFinishedListener caller;
 	
     public interface OnFinishedListener 
     {
-        public void onSuccess(List<ShoppingList> list);
+        public void onSuccess(List<String> result);
         public void onError();
     }
     
@@ -29,18 +28,20 @@ public class UnsignedUsers extends AsyncTask<String, Void, List<ShoppingList>>
 		this.caller = caller;
 	}
 	@Override
-	protected List<ShoppingList> doInBackground(String... params) 
+	protected List<String> doInBackground(String... params) 
 	{
-		String userId = params[0];
-		HttpGetRequest request = new HttpGetRequest(ConstService.SERVER_URL + ConstService.SERVER_GET_USER_LISTS_SERVLET);
-		request.addParamerters(ConstService.URL_PARAM_USERT_ID, userId);
+
+		System.out.println("!@#!@#!@#!@#");
 		
-		List<ShoppingList> arrayToReturn = null;
+		HttpGetRequest request = new HttpGetRequest(ConstService.SERVER_URL + ConstService.SERVER_GET_UNSIGNED_USERS);
+		request.addParamerters(ConstService.URL_PARAM_USERS_LIST, params);
+		
+		List<String> arrayToReturn = null;
 		try {
 			request.execute();
 			String body = request.getResponseBody();
-			ShoppingList[] lists = new Gson().fromJson(body, ShoppingList[].class);
-			arrayToReturn = Arrays.asList(lists);
+			String[] unsigned = new Gson().fromJson(body, String[].class);
+			arrayToReturn = Arrays.asList(unsigned);
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,13 +51,12 @@ public class UnsignedUsers extends AsyncTask<String, Void, List<ShoppingList>>
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}	
 		return arrayToReturn;
 	}
 	
 	@Override
-	protected void onPostExecute(List<ShoppingList> result) 
+	protected void onPostExecute(List<String> result) 
 	{
 		super.onPostExecute(result);
 		if (result != null)
@@ -68,5 +68,4 @@ public class UnsignedUsers extends AsyncTask<String, Void, List<ShoppingList>>
 			caller.onError();
 		}
 	}
-
 }

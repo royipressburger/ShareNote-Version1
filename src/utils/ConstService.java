@@ -12,6 +12,7 @@ public class ConstService
 	public static final String SERVER_GET_UNSIGNED_USERS = "/getUnsignedUsers";
 	public static final String URL_PARAM_LIST_ID = "listid";
 	public static final String URL_PARAM_USERT_ID = "userid";
+	public static final String URL_PARAM_USERS_LIST = "usersList";
 	public static final String URL_PARAM_USER_PHONE = "phone";
 	
 	//JSON CONST
