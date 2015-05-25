@@ -30,8 +30,6 @@ private OnFinishedListener caller;
 	@Override
 	protected List<String> doInBackground(String... params) 
 	{
-
-		System.out.println("!@#!@#!@#!@#");
 		
 		HttpGetRequest request = new HttpGetRequest(ConstService.SERVER_URL + ConstService.SERVER_GET_UNSIGNED_USERS);
 		request.addParamerters(ConstService.URL_PARAM_USERS_LIST, params);

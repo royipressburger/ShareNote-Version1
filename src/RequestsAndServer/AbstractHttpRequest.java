@@ -40,10 +40,6 @@ public abstract class AbstractHttpRequest
 		for (int i = 0; i < value.length; i++) {
 			 val = val + "," + value[i];
 		}
-		System.out.println("@@@@@@@@@@@@@@@@@");
-		System.out.println("Key is " + key);
-		System.out.println("Val is " + val.substring(1));
-		System.out.println("@@@@@@@@@@@@@@@@@");
 		urlParams.add(new BasicNameValuePair(key,val.substring(1)));
 	}
 

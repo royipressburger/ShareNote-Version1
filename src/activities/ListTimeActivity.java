@@ -90,6 +90,7 @@ public class ListTimeActivity extends AbsractAppActivity
 		listToCreate.setEndTime(getTimeInMilSecondsFromViews());
 		listToCreate.setLastReminder(lastReminderInMinuts);
 		
+		//Send sms to unsigned users
 		List<String> usersNumbers = new ArrayList<String>();
 		final List<String> unsignedUsers = new ArrayList<String>();
 		
@@ -113,7 +114,8 @@ public class ListTimeActivity extends AbsractAppActivity
 				for (String number : list) 
 				{
 					SmsManager sms = SmsManager.getDefault();
-					String msg = "Helloooooo!!!!";
+					String msg = "You've been added to a note on Mr. Note! Download it today from " +
+							"https://goo.gl/wlWnVU";
 					sms.sendTextMessage(number, null, msg, null, null);
 				}
 			}
@@ -124,20 +126,9 @@ public class ListTimeActivity extends AbsractAppActivity
 			}
 		};
 
-		UnsignedUsers task = new UnsignedUsers(listener);
-//		String param = SharedPref.getSharedPrefsString(ConstService.PREF_PHONE_NUM, null);
-		
-//		task.execute(param);
+		UnsignedUsers task = new UnsignedUsers(listener);		
 		task.execute(usersNumbersAsArray);
 		
-//		unsignedUsers.add("0547402655");
-//		unsignedUsers.add("0546402664");
-//		SmsManager sms = SmsManager.getDefault();
-//		String msg = "Helloooooo!!!!";
-//		for (String string : unsignedUsers) {
-//			sms.sendTextMessage(string, null, msg, null, null);
-//		}
-
 		//Set will cause the list to be created.
 		createList();
 	}

@@ -79,9 +79,6 @@ public class ShoppingList implements Serializable
 	}
 	
 	public ArrayList<NoteContact> getUsers() {
-		System.out.println("55555555555555555555555555555555555555555555555555");
-		System.out.println("shopping list class getUsers array length " + users.size());
-		System.out.println(users.toString());
 		return users;
 	}
 	
