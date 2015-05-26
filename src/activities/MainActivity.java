@@ -10,11 +10,8 @@ import utils.MyListView;
 import utils.SharedPref;
 import AsyncTasks.GetUserListsById;
 import NoteObjects.ShoppingList;
-import android.annotation.SuppressLint;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -24,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,12 +33,18 @@ public class MainActivity extends ActionBarActivity {
 	MyListView<ShoppingList> myLists;
 	ListView myListsView;
 
+	TextView textViewNoLists;
+	Button buttonAddList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setActionBar();
 		myListsView = (ListView) findViewById(R.id.listViewMyLists);
+		textViewNoLists = (TextView) findViewById(R.id.textViewNoLists);
+		buttonAddList = (Button) findViewById(R.id.buttonStartList);
+		textViewNoLists.setVisibility(View.GONE);
+		buttonAddList.setVisibility(View.GONE);
 		setListenerToList();
 		setListView();
 		getMyLists();
@@ -71,6 +75,18 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onSuccess(List<ShoppingList> list) 
 			{
+				if (list.size() == 0)
+				{
+					textViewNoLists.setVisibility(View.VISIBLE);
+					buttonAddList.setVisibility(View.VISIBLE);
+					myListsView.setVisibility(View.GONE);
+				}
+				else
+				{
+					textViewNoLists.setVisibility(View.GONE);
+					buttonAddList.setVisibility(View.GONE);
+					myListsView.setVisibility(View.VISIBLE);
+				}
 				for (ShoppingList shoppingList : list) 
 				{
 					myLists.add(shoppingList);

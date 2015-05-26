@@ -3,6 +3,7 @@ package activities;
 import utils.ConstService;
 import utils.SharedPref;
 import utils.Utils;
+import AsyncTasks.CreateNewUser;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -14,7 +15,6 @@ import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import AsyncTasks.CreateNewUser;
 
 import com.idc.milab.mrnote.R;
 
@@ -49,7 +49,9 @@ public class RegisterActivity extends AbsractAppActivity {
 	{
 		SharedPref.initSharedPrefs(getApplicationContext());
 		String userid = SharedPref.getSharedPrefsString(ConstService.PREF_USER_ID, ConstService.PREF_DEFAULT);
-		if (!userid.equals(ConstService.PREF_DEFAULT))
+		String regestrationVersion = SharedPref.getSharedPrefsString(ConstService.PREF_REGESTRATION_VERSION_KEY, ConstService.PREF_DEFAULT);
+		
+		if (!userid.equals(ConstService.PREF_DEFAULT) && regestrationVersion.equals(ConstService.REGESTATION_VERSION))
 		{
 			launchMainWindow();
 		}
@@ -79,7 +81,7 @@ public class RegisterActivity extends AbsractAppActivity {
 	private void createNewUser() 
 	{
 		final String phone = PhoneNumberUtils.formatNumberToE164(phoneCode.getText().toString() + phoneNumber.getText().toString(), "IL"); 
-		String nick = nickName.getText().toString();
+		final String nick = nickName.getText().toString();
 		String android_id = Secure.getString(getApplicationContext().getContentResolver(),Secure.ANDROID_ID); 
 		String regId = SharedPref.getSharedPrefsString(ConstService.PREF_REGESTRATION_ID, ConstService.PREF_DEFAULT);
 		while (regId.equals(ConstService.PREF_DEFAULT))
@@ -95,6 +97,8 @@ public class RegisterActivity extends AbsractAppActivity {
 				Utils.toastMessage("User Added", getApplicationContext());
 				SharedPref.setSharedPrefsString(ConstService.PREF_USER_ID, result);
 				SharedPref.setSharedPrefsString(ConstService.PREF_PHONE_NUM, phone);
+				SharedPref.setSharedPrefsString(ConstService.PREF_REGESTRATION_VERSION_KEY, ConstService.REGESTATION_VERSION);
+				SharedPref.setSharedPrefsString(ConstService.PREF_USER_NICK, nick);
 				launchMainWindow();
 			}
 			

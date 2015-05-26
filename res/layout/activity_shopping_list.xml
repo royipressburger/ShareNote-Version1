@@ -28,7 +28,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textViewListName"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-    
+
     <TextView
         android:id="@+id/textViewTimeLeft"
         android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textViewListName"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-    
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,8 +63,9 @@
 
     <EditText
         android:id="@+id/editTextItem"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/buttonAddItem"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:ems="10"
@@ -79,8 +80,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:onClick="onButtonAddItemClicked"
-        android:text="Add" />
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_send"
+        android:onClick="onButtonAddItemClicked"/>
 
 </RelativeLayout>

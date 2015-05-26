@@ -13,4 +13,25 @@
         android:scrollingCache="false" >
     </ListView>
 
+    <TextView
+        android:id="@+id/textViewNoLists"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/no_lists"
+        android:textStyle="bold"
+        android:textSize="40sp" />
+
+     <Button
+        android:id="@+id/buttonStartList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/textViewNoLists"
+        android:background="@drawable/big_add_icon"
+        android:onClick="onButtonAddClicked"/>
 </RelativeLayout>
