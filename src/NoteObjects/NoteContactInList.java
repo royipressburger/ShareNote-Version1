@@ -4,12 +4,12 @@ package NoteObjects;
 public class NoteContactInList
 {
 	private NoteContact userInfo;
-	private int color;
+	private boolean isSelected;
 	
-	public NoteContactInList(NoteContact userInfo, int color) 
+	public NoteContactInList(NoteContact userInfo) 
 	{
 		this.userInfo = userInfo;
-		this.color = color;
+		isSelected = false;
 	}
 
 	public NoteContact getUserInfo() {
@@ -20,14 +20,12 @@ public class NoteContactInList
 		this.userInfo = userInfo;
 	}
 
-	public int getColor() {
-		return color;
+	public boolean isSelected() {
+		return isSelected;
 	}
 
-	public void setColor(int color) {
-		this.color = color;
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
 	}
-	
-	
 
 }

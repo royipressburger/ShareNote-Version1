@@ -3,10 +3,12 @@ package activities;
 import java.util.ArrayList;
 
 import utils.ConstService;
+import utils.ContactAdapter;
 import utils.MyListView;
 import utils.SharedPref;
 import utils.Utils;
 import NoteObjects.NoteContact;
+import NoteObjects.NoteContactInList;
 import NoteObjects.ShoppingList;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
@@ -18,58 +20,51 @@ import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.idc.milab.mrnote.R;
 
 public class SelectUsersActivity extends AbsractAppActivity 
 {
-	private MyListView<NoteContact> contacts;
 	private ShoppingList listToCreate;
-	
+	private ListView mListView;
+	private ContactAdapter mContactAdapter;
+	private ArrayList<NoteContactInList> mContactList;
+	private SearchView mSearchView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_users);
-		listToCreate = new Gson().fromJson(getIntent().getExtras().getString(ConstService.BUNDLE_NEW_LIST), ShoppingList.class);
-		((SearchView) findViewById(R.id.searchView1)).setOnQueryTextListener(new OnQueryTextListener() {
-			
-			@Override
-			public boolean onQueryTextChange(String arg0) 
-			{
-				contacts.getAdapter().getFilter().filter(arg0);
-				return false;
-			}
+		mContactList =  new ArrayList<NoteContactInList>();
+		mContactAdapter = new ContactAdapter(this, R.layout.contact_list_item_with_checkbox, mContactList);
 
-			@Override
-			public boolean onQueryTextSubmit(String query) {
-				contacts.getAdapter().getFilter().filter(query);
-				return false;
-			}
-		});
+		mListView = (ListView) findViewById(R.id.contactsList);
+		mSearchView = (SearchView) findViewById(R.id.searchView1);
+		mListView.setAdapter(mContactAdapter);
+		listToCreate = new Gson().fromJson(getIntent().getExtras().getString(ConstService.BUNDLE_NEW_LIST), ShoppingList.class);
+		setSearchViewTextListener();
+		setListViewOnClickedListener();
 	}
-	
-	
+
 	@Override
 	public void onPostCreate(Bundle savedInstanceState) 
 	{
-		contacts = new MyListView<NoteContact>(this, android.R.layout.simple_list_item_multiple_choice, (ListView) findViewById(R.id.contactsList));
-		
-		contacts.setChoiseMode(ListView.CHOICE_MODE_MULTIPLE);
-		
-		for (NoteContact contact : getAllContacts()) 
+		for (NoteContactInList contact : getAllContacts()) 
 		{
-			contacts.add(contact);
+			mContactList.add(contact);
 		}
-		
+
 		super.onPostCreate(savedInstanceState);
 	}
-	
-	private ArrayList<NoteContact> getAllContacts()
+
+	private ArrayList<NoteContactInList> getAllContacts()
 	{
 		String phoneNumber = null;
 		Uri CONTENT_URI = ContactsContract.Contacts.CONTENT_URI;
@@ -81,8 +76,8 @@ public class SelectUsersActivity extends AbsractAppActivity
 		String NUMBER = ContactsContract.CommonDataKinds.Phone.NUMBER;
 		ContentResolver contentResolver = getContentResolver();
 		Cursor cursor = contentResolver.query(CONTENT_URI, null,null, null, null); 
-		ArrayList<NoteContact> contatcts = new ArrayList<NoteContact>();
-		
+		ArrayList<NoteContactInList> contatcts = new ArrayList<NoteContactInList>();
+
 		// Loop for every contact in the phone
 		if (cursor.getCount() > 0) {
 			while (cursor.moveToNext()) {
@@ -99,15 +94,15 @@ public class SelectUsersActivity extends AbsractAppActivity
 						phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(NUMBER));
 						contact.setPhone(phoneNumber);
 					}
-					
+
 					phoneCursor.close();
 				}
-				
+
 				if (contact.getName() != null && contact.getPhone() != null)
-					contatcts.add(contact);
+					contatcts.add(new NoteContactInList(contact));
 			}
 		}
-		
+
 		return contatcts;
 	}
 
@@ -124,27 +119,60 @@ public class SelectUsersActivity extends AbsractAppActivity
 	@SuppressLint("NewApi")
 	private ArrayList<NoteContact> getSelectedUsers() 
 	{
-		SparseBooleanArray checked = contacts.getListView().getCheckedItemPositions();
 		ArrayList<NoteContact> selectedContats = new ArrayList<NoteContact>();
-		for (int i = 0; i < contacts.getListView().getAdapter().getCount(); i++) {
-		    if (checked.get(i)) 
-		    {
-		    	try 
-		    	{
-					NoteContact contact = (NoteContact) contacts.getListView().getItemAtPosition(i);
-					contact.setPhone(PhoneNumberUtils.formatNumberToE164(contact.getPhone(), "IL"));
-					selectedContats.add(contact);
-				} 
-		    	catch (Exception e) 
-				{
-					Utils.toastMessage(e.getMessage(), getApplicationContext());
-				}
-		    }
+		
+		for (NoteContactInList noteContact : mContactList) 
+		{
+			if (noteContact.isSelected())
+			{
+				NoteContact userInfo = noteContact.getUserInfo();
+				userInfo.setPhone(PhoneNumberUtils.formatNumberToE164(userInfo.getPhone(), "IL"));
+				selectedContats.add(noteContact.getUserInfo());
+			}
 		}
+		
 		NoteContact self = new NoteContact();
 		self.setName("Me");
 		self.setPhone(PhoneNumberUtils.formatNumberToE164((SharedPref.getSharedPrefsString(ConstService.PREF_PHONE_NUM, "0")), "IL"));
 		selectedContats.add(self);
 		return selectedContats;
+	}
+
+	private void setListViewOnClickedListener() {
+		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+				NoteContactInList contact = (NoteContactInList) mListView.getItemAtPosition(position);
+
+				boolean selected = contact.isSelected();
+
+				contact.setSelected(selected ? false : true);
+
+				Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
+
+				mContactAdapter.notifyDataSetChanged();
+			}
+		});
+	}
+
+	private void setSearchViewTextListener() {
+		mSearchView.setOnQueryTextListener(new OnQueryTextListener() {
+
+			@Override
+			public boolean onQueryTextChange(String arg0) 
+			{
+				mContactAdapter.getFilter().filter(arg0);
+				mContactAdapter.notifyDataSetChanged();
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				mContactAdapter.getFilter().filter(query);
+				mContactAdapter.notifyDataSetChanged();
+				return false;
+			}
+		});
 	}
 }
