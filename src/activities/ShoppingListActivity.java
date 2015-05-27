@@ -1,11 +1,14 @@
 package activities;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 
 import utils.ConstService;
 import utils.MyListView;
+import utils.SharedPref;
 import utils.Utils;
 import AsyncTasks.AddItemToListTask;
 import AsyncTasks.GetShoppingListByIdTask;
@@ -15,7 +18,10 @@ import NoteObjects.ShoppingList;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -29,6 +35,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 	private MyListView<String> listViewItems;
 	private TextView textViewListName;
 	private TextView textViewUsers;
+	private TextView textViewTimeLeft;
 	private EditText editTextItemToAdd;
 
 	private ShoppingList shoppingList;
@@ -37,11 +44,13 @@ public class ShoppingListActivity extends AbsractAppActivity
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.activity_shopping_list);
-		listViewItems = new MyListView<String>(this, android.R.layout.simple_expandable_list_item_1, (ListView) findViewById(R.id.listViewListItems));
+		listViewItems = new MyListView<String>(this, R.layout.shopping_list_items, (ListView) findViewById(R.id.listViewListItems));
+		createCustomAdapter();
 		textViewListName = (TextView) findViewById(R.id.textViewListName);
 		textViewUsers = (TextView) findViewById(R.id.textViewListUsers);
+		textViewTimeLeft = (TextView)findViewById(R.id.textViewTimeLeft);
 
 		// Remove the next button from action bar
 		ImageButton button = ((ImageButton) findViewById(R.id.action_bar_item_next));
@@ -91,13 +100,15 @@ public class ShoppingListActivity extends AbsractAppActivity
 				ArrayList<NoteContact> usersList = shoppingList.getUsers();
 				for (int i = 0; i < usersList.size(); i++) {
 					if(i != (usersList.size() - 1)){
-						users += usersList.get(i).toString()+", ";
+						users += usersList.get(i).toString()+ " | ";
 					}
 					else{
 						users += usersList.get(i).toString();
 					}
 				}
+
 				textViewUsers.setText(users);
+				textViewTimeLeft.setText(shoppingList.calculateTimeLeft());
 			}
 
 			@Override
@@ -129,9 +140,57 @@ public class ShoppingListActivity extends AbsractAppActivity
 		};
 
 		AddItemToListTask task = new AddItemToListTask(onFinishedListener);
-		task.execute(listId, itemToAdd);
+		String userNick = SharedPref.getSharedPrefsString(ConstService.PREF_USER_NICK, ConstService.PREF_DEFAULT);
+		if (!userNick.equals(ConstService.PREF_DEFAULT))
+		{
+			userNick = ConstService.ITEM_ADDER_SEPERATOR + userNick;
+		}
+		else
+		{
+			userNick = "";
+		}
+		task.execute(listId, itemToAdd + userNick);
 	}
 
+	private void createCustomAdapter()
+	{
+		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getApplicationContext(), R.id.textViewItemName, listViewItems.getItems())
+				{
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+				View view = layoutInflater.inflate(R.layout.shopping_list_items, null, false);
+
+				String item = getItem(position);
+				TextView itemName = (TextView) view.findViewById(R.id.textViewItemName);
+				TextView itemAdder = (TextView) view.findViewById(R.id.textViewItemAdder);
+				String adder = "";
+				Pattern pattern = Pattern.compile(ConstService.ITEM_ADDER_PATTERN);
+				Matcher matcher = pattern.matcher(item);
+				if (matcher.find())
+				{
+					if (matcher.group(1) == null ) 
+					{
+						adder = "";
+					}
+					else
+					{
+						adder = matcher.group(1);
+						item = new StringBuilder(item).replace(matcher.start(), matcher.end(),"").toString();
+					}
+				}
+
+				if (adder.equals(SharedPref.getSharedPrefsString(ConstService.PREF_USER_NICK, ConstService.PREF_DEFAULT)))
+				{
+					adder = "Me";
+				}
+				itemAdder.setText(adder);
+				itemName.setText(item);
+				return view;
+			}};
+
+			listViewItems.setAdapter(listAdapter);
+	}
 	private void createHandlerToGetListEveryFewSeconds(final String listId)
 	{
 		new Handler().postDelayed(new Runnable() {

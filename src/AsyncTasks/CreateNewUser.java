@@ -32,6 +32,7 @@ public class CreateNewUser extends AsyncTask<String, Void, String>
 		String phone = params[0];
 		String nick = params[1];
 		String androidId = params[2];
+		String regId = params[3];
 		
 		HttpPostRequest request = new HttpPostRequest(ConstService.SERVER_URL + ConstService.SERVER_CREATE_USER_SERVLET);
 		JSONObject json = new JSONObject();
@@ -41,6 +42,7 @@ public class CreateNewUser extends AsyncTask<String, Void, String>
 			json.put(ConstService.USER_ANDROID_ID, androidId);
 			json.put(ConstService.USER_NAME, nick);
 			json.put(ConstService.USER_PHONE, phone);
+			json.put(ConstService.USER_REGESTRATION_ID, regId);
 			request.setBody(json.toString());
 			request.execute();
 			userId = request.getResponseBody();

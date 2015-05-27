@@ -24,12 +24,23 @@ public class ConstService
 	public static final String USER_NAME = "name";
 	public static final String USER_PHONE = "phone";
 	public static final String USER_ANDROID_ID = "aid";
+	public static final String USER_REGESTRATION_ID = "regId";
 	
 	public static final String BUNDLE_NEW_LIST = "newList";
 	public static final String BUNDLE_LIST_ID = "listId";
 	
 	public static final String PREF_USER_ID = "userid";
+	public static final String PREF_USER_NICK = "nick";
 	public static final String PREF_DEFAULT = "default";
 	public static final String PREF_PHONE_NUM = "phone";
+
+	public static final String PREF_REGESTRATION_ID = "regid";
+	public static final String PREF_REGESTRATION_VERSION_KEY = "regVersion";
 	
+	
+	public static final String ITEM_ADDER_PATTERN = "&(.*)$";
+	public static final String ITEM_ADDER_SEPERATOR = "&";
+	
+	public static final String APP_SENDER_ID = "1057836653958";
+	public static final String REGESTATION_VERSION = "0";	
 }

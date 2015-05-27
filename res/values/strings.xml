@@ -18,7 +18,9 @@
     <string name="title_activity_shopping_list">ShoppingListActivity</string>
     <string name="addItem">Add an item</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="loading">Creating list, please wait.</string>
+	<string name="loading">Creating list, please wait.</string>
+	<string name="no_lists">Create a new list by pressing the button</string>
+
 
     <string-array name="CountryCodes">
         <item>93,AF</item>

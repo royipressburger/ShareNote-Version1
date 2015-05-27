@@ -1,6 +1,8 @@
 package activities;
 
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import utils.ConstService;
@@ -9,6 +11,7 @@ import utils.SharedPref;
 import AsyncTasks.GetUserListsById;
 import NoteObjects.ShoppingList;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -18,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,13 +33,18 @@ public class MainActivity extends ActionBarActivity {
 	MyListView<ShoppingList> myLists;
 	ListView myListsView;
 
+	TextView textViewNoLists;
+	Button buttonAddList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setActionBar();
 		myListsView = (ListView) findViewById(R.id.listViewMyLists);
-		
+		textViewNoLists = (TextView) findViewById(R.id.textViewNoLists);
+		buttonAddList = (Button) findViewById(R.id.buttonStartList);
+		textViewNoLists.setVisibility(View.GONE);
+		buttonAddList.setVisibility(View.GONE);
 		setListenerToList();
 		setListView();
 		getMyLists();
@@ -66,11 +75,23 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onSuccess(List<ShoppingList> list) 
 			{
+				if (list.size() == 0)
+				{
+					textViewNoLists.setVisibility(View.VISIBLE);
+					buttonAddList.setVisibility(View.VISIBLE);
+					myListsView.setVisibility(View.GONE);
+				}
+				else
+				{
+					textViewNoLists.setVisibility(View.GONE);
+					buttonAddList.setVisibility(View.GONE);
+					myListsView.setVisibility(View.VISIBLE);
+				}
 				for (ShoppingList shoppingList : list) 
 				{
 					myLists.add(shoppingList);
 				}
-				
+
 				sortLists();
 			}
 
@@ -82,7 +103,7 @@ public class MainActivity extends ActionBarActivity {
 
 		GetUserListsById task = new GetUserListsById(listener);
 		String param = SharedPref.getSharedPrefsString(ConstService.PREF_PHONE_NUM, null);
-		
+
 		task.execute(param);
 	}
 
@@ -104,8 +125,8 @@ public class MainActivity extends ActionBarActivity {
 
 	private void setListView() {
 		myLists = new MyListView<ShoppingList>(this, R.layout.main_list_item, myListsView);
-		ArrayAdapter<ShoppingList> listAdapter = new ArrayAdapter<ShoppingList>(getApplicationContext(), R.layout.main_list_item, R.id.listItemListOpener, myLists.getItems())
-		{
+		ArrayAdapter<ShoppingList> listAdapter = new ArrayAdapter<ShoppingList>(getApplicationContext(), R.id.listItemListOpener, myLists.getItems())
+				{
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
 				LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
@@ -117,20 +138,26 @@ public class MainActivity extends ActionBarActivity {
 				TextView endTime = (TextView) view.findViewById(R.id.listItemListDate);
 
 				//TODO: setOpner!
+				String date = (new SimpleDateFormat("dd/M")).format(new Date(item.getStartTime()));
 				String timeLeft = item.calculateTimeLeft();
 				if (timeLeft.equals("Done"))
 				{
 					((LinearLayout) view.findViewById(R.id.list_item_layout)).setBackgroundResource(R.drawable.list_item_done);
 				}
+				else
+				{
+					timeLeft = String.format("%s %s %s", timeLeft, "left", date);
+				}
+
 				listName.setText(item.getName());
 				listOpener.setText("me");
 				endTime.setText(timeLeft);
 				return view;
 			}};
 
-		myLists.setAdapter(listAdapter);
-		myListsView.setDivider(null);
-		sortLists();
+			myLists.setAdapter(listAdapter);
+			myListsView.setDivider(null);
+			sortLists();
 	}
 
 	private void sortLists() {
@@ -142,7 +169,7 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 	}
-	
+
 	public void onButtonAddClicked(View v) 
 	{
 		Intent intent = new Intent(getApplicationContext(), SetListNameActivity.class);
