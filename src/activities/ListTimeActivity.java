@@ -10,14 +10,11 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import utils.ConstService;
-import utils.SharedPref;
 import AsyncTasks.CreateListTask;
-import AsyncTasks.GetUserListsById;
 import AsyncTasks.UnsignedUsers;
 import NoteObjects.NoteContact;
 import NoteObjects.ShoppingList;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;

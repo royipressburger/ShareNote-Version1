@@ -112,9 +112,9 @@ public class ShoppingListActivity extends AbsractAppActivity
 			}
 
 			@Override
-			public void onError() 
+			public void onError(String error) 
 			{
-				Utils.toastMessage("Cannot get list", getApplicationContext());
+				Utils.toastMessage("Cannot get list " + error, getApplicationContext());
 			}
 		};
 

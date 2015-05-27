@@ -42,5 +42,5 @@ public class ConstService
 	public static final String ITEM_ADDER_SEPERATOR = "&";
 	
 	public static final String APP_SENDER_ID = "1057836653958";
-	public static final String REGESTATION_VERSION = "0";	
+	public static final String REGESTATION_VERSION = "1";	
 }

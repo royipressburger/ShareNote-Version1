@@ -5,7 +5,6 @@ import utils.SharedPref;
 import utils.Utils;
 import AsyncTasks.CreateNewUser;
 import android.annotation.SuppressLint;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +15,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.idc.milab.mrnote.R;
 
 public class RegisterActivity extends AbsractAppActivity {
@@ -23,34 +25,28 @@ public class RegisterActivity extends AbsractAppActivity {
 	private EditText nickName;
 	private EditText phoneNumber;
 	private TextView phoneCode;
-	
+
+	private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
-		checkIfNewUser();
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_register);
-		registerToGcm();
-		phoneNumber = (EditText) findViewById(R.id.editTextPhoneNumber);
-		nickName = (EditText) findViewById(R.id.editTextNickName);
-		phoneCode = (TextView) findViewById(R.id.textViewPhoneCode);
-		phoneCode.setText("+" + GetCountryZipCode());
+		if (checkPlayServices()){
+			checkIfNewUserOrNewVersion();
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.activity_register);
+			phoneNumber = (EditText) findViewById(R.id.editTextPhoneNumber);
+			nickName = (EditText) findViewById(R.id.editTextNickName);
+			phoneCode = (TextView) findViewById(R.id.textViewPhoneCode);
+			phoneCode.setText("+" + GetCountryZipCode());
+		}
 	}
 
-	private void registerToGcm() 
-	{
-		Intent registrationIntent = new Intent("com.google.android.c2dm.intent.REGISTER");
-        registrationIntent.putExtra("app", PendingIntent.getBroadcast(getApplicationContext(), 0, new Intent(), 0));
-        registrationIntent.putExtra("sender", ConstService.APP_SENDER_ID);
-        startService(registrationIntent);
-	}
-
-	private void checkIfNewUser() 
+	private void checkIfNewUserOrNewVersion() 
 	{
 		SharedPref.initSharedPrefs(getApplicationContext());
 		String userid = SharedPref.getSharedPrefsString(ConstService.PREF_USER_ID, ConstService.PREF_DEFAULT);
 		String regestrationVersion = SharedPref.getSharedPrefsString(ConstService.PREF_REGESTRATION_VERSION_KEY, ConstService.PREF_DEFAULT);
-		
+
 		if (!userid.equals(ConstService.PREF_DEFAULT) && regestrationVersion.equals(ConstService.REGESTATION_VERSION))
 		{
 			launchMainWindow();
@@ -84,11 +80,7 @@ public class RegisterActivity extends AbsractAppActivity {
 		final String nick = nickName.getText().toString();
 		String android_id = Secure.getString(getApplicationContext().getContentResolver(),Secure.ANDROID_ID); 
 		String regId = SharedPref.getSharedPrefsString(ConstService.PREF_REGESTRATION_ID, ConstService.PREF_DEFAULT);
-		while (regId.equals(ConstService.PREF_DEFAULT))
-		{
-			regId = SharedPref.getSharedPrefsString(ConstService.PREF_REGESTRATION_ID, ConstService.PREF_DEFAULT);
-		}
-		
+
 		CreateNewUser.OnFinishedListener listenner = new CreateNewUser.OnFinishedListener() 
 		{
 			@Override
@@ -101,15 +93,15 @@ public class RegisterActivity extends AbsractAppActivity {
 				SharedPref.setSharedPrefsString(ConstService.PREF_USER_NICK, nick);
 				launchMainWindow();
 			}
-			
+
 			@Override
 			public void onError() 
 			{
 				Utils.toastMessage("Cannot create User", getApplicationContext());
 			}
 		};
-		
-		CreateNewUser task = new CreateNewUser(listenner);
+
+		CreateNewUser task = new CreateNewUser(listenner, getApplicationContext());
 		task.execute(phone, nick, android_id, regId);
 	}
 
@@ -117,7 +109,7 @@ public class RegisterActivity extends AbsractAppActivity {
 	{
 		boolean legalPhone = phoneNumber.getText().toString() != null && !phoneNumber.getText().toString().isEmpty();
 		boolean legalNick = nickName.getText().toString() != null && !nickName.getText().toString().isEmpty();
-		
+
 		return legalNick && legalPhone;
 	}
 
@@ -137,5 +129,19 @@ public class RegisterActivity extends AbsractAppActivity {
 			}
 		}
 		return CountryZipCode;
+	}
+
+	private boolean checkPlayServices() {
+		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+		if (resultCode != ConnectionResult.SUCCESS) {
+			if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+				GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+						PLAY_SERVICES_RESOLUTION_REQUEST).show();
+			} else {
+				finish();
+			}
+			return false;
+		}
+		return true;
 	}
 }

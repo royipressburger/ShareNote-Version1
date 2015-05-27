@@ -24,11 +24,11 @@ import android.os.AsyncTask;
 public class GetShoppingListByIdTask extends AsyncTask<String, Void, JSONObject>
 {
 	private OnFinishedListener mCaller;
-	
+	private String error;
     public interface OnFinishedListener 
     {
         public void onSuccess(JSONObject json);
-        public void onError();
+        public void onError(String error);
     }
     
 	public GetShoppingListByIdTask(OnFinishedListener caller)
@@ -48,20 +48,8 @@ public class GetShoppingListByIdTask extends AsyncTask<String, Void, JSONObject>
 		{
 			newRequest.execute();
 			jsonList = new JSONObject(newRequest.getResponseBody());
-		} catch (HttpResponseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e){
+			error = e.getMessage();
 			e.printStackTrace();
 		}
 		
@@ -79,7 +67,7 @@ public class GetShoppingListByIdTask extends AsyncTask<String, Void, JSONObject>
 		}
 		else
 		{
-			mCaller.onError();
+			mCaller.onError(error);
 		}
 	}
 }

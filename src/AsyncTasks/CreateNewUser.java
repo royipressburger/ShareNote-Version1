@@ -7,23 +7,28 @@ import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import RequestsAndServer.HttpPostRequest;
 import utils.ConstService;
+import utils.SharedPref;
+import RequestsAndServer.HttpPostRequest;
+import android.content.Context;
 import android.os.AsyncTask;
+
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 public class CreateNewUser extends AsyncTask<String, Void, String> 
 {
-	private OnFinishedListener caller;
-	
+	private OnFinishedListener listener;
+	private Context context;
     public interface OnFinishedListener 
     {
         public void onSuccess(String result);
         public void onError();
     }
     
-    public CreateNewUser(OnFinishedListener caller)
+    public CreateNewUser(OnFinishedListener listner, Context caller)
     {
-    	this.caller = caller;
+    	this.listener = listner;
+    	context = caller;
     }
 
 	@Override
@@ -33,7 +38,17 @@ public class CreateNewUser extends AsyncTask<String, Void, String>
 		String nick = params[1];
 		String androidId = params[2];
 		String regId = params[3];
-		
+		if (regId.equals(ConstService.PREF_DEFAULT))
+		{
+			try 
+			{
+				regId = GoogleCloudMessaging.getInstance(context).register(ConstService.APP_SENDER_ID);
+			} 
+			catch (IOException e) 
+			{
+				
+			}
+		}
 		HttpPostRequest request = new HttpPostRequest(ConstService.SERVER_URL + ConstService.SERVER_CREATE_USER_SERVLET);
 		JSONObject json = new JSONObject();
 		String userId = null;
@@ -68,11 +83,11 @@ public class CreateNewUser extends AsyncTask<String, Void, String>
 	{
 		if (result != null && !result.isEmpty())
 		{
-			caller.onSuccess(result.replace("\"", ""));
+			listener.onSuccess(result.replace("\"", ""));
 		}
 		else
 		{
-			caller.onError();
+			listener.onError();
 		}
 		
 		super.onPostExecute(result);
