@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 import utils.ConstService;
 import utils.ContactAdapter;
-import utils.MyListView;
 import utils.SharedPref;
-import utils.Utils;
 import NoteObjects.NoteContact;
 import NoteObjects.NoteContactInList;
 import NoteObjects.ShoppingList;
@@ -18,7 +16,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -133,7 +130,7 @@ public class SelectUsersActivity extends AbsractAppActivity
 		
 		NoteContact self = new NoteContact();
 		self.setName("Me");
-		self.setPhone(PhoneNumberUtils.formatNumberToE164((SharedPref.getSharedPrefsString(ConstService.PREF_PHONE_NUM, "0")), "IL"));
+		self.setPhone(PhoneNumberUtils.formatNumberToE164((SharedPref.getSharedPrefsString(ConstService.PREF_PHONE_NUM)), "IL"));
 		selectedContats.add(self);
 		return selectedContats;
 	}

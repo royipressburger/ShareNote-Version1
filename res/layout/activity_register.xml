@@ -15,22 +15,23 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="14dp"
-        android:text="Enter your phone"
+        android:text="Enter your phone number:"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
         android:id="@+id/textViewPhoneCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@+id/textViewEnterPhone"
         android:layout_below="@+id/textViewEnterPhone"
-        android:layout_alignBottom="@+id/editTextPhoneNumber"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+        
     <EditText
         android:id="@+id/editTextPhoneNumber"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewEnterPhone"
+        android:layout_alignBottom="@+id/textViewPhoneCode"
         android:layout_centerHorizontal="true"
         android:layout_toRightOf="@+id/textViewPhoneCode"
         android:ems="10"
@@ -44,9 +45,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textViewEnterPhone"
-        android:layout_centerVertical="true"
-        android:text="Nick name:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_below="@+id/editTextPhoneNumber"
+        android:layout_marginTop="50dp"
+        android:text="Enter user name:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/editTextNickName"
@@ -54,8 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textViewEnterPhone"
         android:layout_below="@+id/textViewNickName"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="10dp"
         android:ems="10" 
         android:inputType="text"/>
 

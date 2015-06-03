@@ -27,8 +27,8 @@ public class SharedPref
 	 * @param defValue - default value
 	 * @return - The value that match the key or <defValue> if the key was not found
 	 */
-	public static String getSharedPrefsString(String key, String defValue) {
-		String returnedValue = sharedPref.getString(PREF_PREFIX + key, PREF_PREFIX + defValue);
+	public static String getSharedPrefsString(String key) {
+		String returnedValue = sharedPref.getString(PREF_PREFIX + key, PREF_PREFIX + ConstService.PREF_DEFAULT);
 		return returnedValue.substring(returnedValue.lastIndexOf(".") + 1);
 	}
 }

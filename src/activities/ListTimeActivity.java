@@ -10,6 +10,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import utils.ConstService;
+import utils.SharedPref;
 import AsyncTasks.CreateListTask;
 import AsyncTasks.UnsignedUsers;
 import NoteObjects.NoteContact;
@@ -86,10 +87,10 @@ public class ListTimeActivity extends AbsractAppActivity
 		listToCreate.setStartTime(Calendar.getInstance().getTimeInMillis());
 		listToCreate.setEndTime(getTimeInMilSecondsFromViews());
 		listToCreate.setLastReminder(lastReminderInMinuts);
+		listToCreate.setOpnerName(SharedPref.getSharedPrefsString(ConstService.PREF_USER_NICK));
 		
 		//Send sms to unsigned users
 		List<String> usersNumbers = new ArrayList<String>();
-		final List<String> unsignedUsers = new ArrayList<String>();
 		
 		for (NoteContact user : listToCreate.getUsers()) {
 			usersNumbers.add(user.getPhone());

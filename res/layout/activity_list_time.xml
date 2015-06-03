@@ -5,20 +5,23 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <TextView
-        android:id="@+id/textViewListName"
+        android:id="@+id/textViewClosingTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Closing time"
-        android:textStyle="bold" />
+        android:layout_above="@+id/datePicker"
+        android:layout_marginBottom="15dp"
+        android:text="Note closing time"
+        android:textStyle="bold" 
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <LinearLayout
         android:id="@+id/datePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewListName"
         android:layout_centerHorizontal="true"
+        android:layout_above="@+id/textViewLastReminder"
+        android:layout_marginBottom="30dp"
         android:background="@color/app_grey"
         android:orientation="horizontal" >
 
@@ -54,10 +57,11 @@
         android:id="@+id/textViewLastReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/datePicker"
         android:layout_centerHorizontal="true"
-        android:paddingTop="30dp"
-        android:text="Last Reminder" />
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:text="Last reminder (minutes)"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/editTextReminder"
@@ -75,6 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textViewLastReminder"
         android:layout_toLeftOf="@+id/textViewLastReminder"
+        android:layout_marginRight="7dp"
         android:contentDescription="Bell"
         android:src="@drawable/ic_bell" />
 

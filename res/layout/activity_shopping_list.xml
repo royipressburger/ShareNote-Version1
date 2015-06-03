@@ -13,7 +13,7 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <TextView
-        android:id="@+id/textViewListName"
+        android:id="@+id/textViewClosingTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewListName"
+        android:layout_below="@+id/textViewClosingTime"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -34,13 +34,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewListName"
+        android:layout_below="@+id/textViewClosingTime"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewListName"
+        android:layout_below="@+id/textViewClosingTime"
         android:layout_toLeftOf="@+id/textViewTimeLeft"
         android:contentDescription="Time left"
         android:src="@drawable/time_left_icon" />

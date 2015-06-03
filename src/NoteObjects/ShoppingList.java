@@ -15,6 +15,7 @@ public class ShoppingList implements Serializable
 	private List<String> items;
 	private ArrayList<NoteContact> users;
 	private int lastReminder;
+	private String opnerName;
 	public String _id;
 
 	public String calculateTimeLeft() 
@@ -90,6 +91,14 @@ public class ShoppingList implements Serializable
 	}
 	public void setLastReminder(int lastReminder) {
 		this.lastReminder = lastReminder;
+	}
+
+	public String getOpnerName() {
+		return opnerName;
+	}
+
+	public void setOpnerName(String opnerName) {
+		this.opnerName = opnerName;
 	}
 
 	public String toString() 

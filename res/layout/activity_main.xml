@@ -17,21 +17,20 @@
         android:id="@+id/textViewNoLists"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/buttonStartList"
         android:layout_centerHorizontal="true"
-        android:paddingTop="20dp"
-        android:layout_marginTop="10dp"
         android:text="@string/no_lists"
-        android:textStyle="bold"
-        android:textSize="40sp" />
+        android:textSize="30sp"/>
 
-     <Button
+    <ImageButton
         android:id="@+id/buttonStartList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/textViewNoLists"
-        android:background="@drawable/big_add_icon"
-        android:onClick="onButtonAddClicked"/>
+        android:src="@drawable/big_icon_pluse1"
+        android:background="@drawable/yellow_button"
+        android:onClick="onButtonAddClicked" />
+
 </RelativeLayout>

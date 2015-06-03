@@ -5,23 +5,23 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <TextView
-        android:id="@+id/textViewListName"
+        android:id="@+id/textViewClosingTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:text="@string/createList"
-        android:layout_centerHorizontal="true" />
-
-
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextlistName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewClosingTime"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="107dp"
-        android:hint="@string/listNamePromptMessage"
+        android:layout_marginTop="15dp"
         android:ems="10"
-        android:textSize="15sp" />
-    
+        android:hint="@string/listNamePromptMessage" />
 
 </RelativeLayout>

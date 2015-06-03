@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.protocol.HTTP;
 
 public class HttpPostRequest extends AbstractHttpRequest
 {
@@ -25,7 +26,7 @@ public class HttpPostRequest extends AbstractHttpRequest
     	addParamsToUrl();
     	httpPost.setURI(new URI(url));
     	httpPost.addHeader("Content-Type", "application/json; charset=UTF-8");
-    	httpPost.setEntity(new StringEntity(body));
+    	httpPost.setEntity(new StringEntity(body, HTTP.UTF_8));
     	response =  httpClient.execute(httpPost);
     }
 

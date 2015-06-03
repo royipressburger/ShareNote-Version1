@@ -9,20 +9,20 @@
     tools:context="activities.SelectUsersActivity" >
 
     <TextView
-        android:id="@+id/textViewListName"
+        android:id="@+id/textViewClosingTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="@string/select_users_massage"
         android:textStyle="bold"
-        android:textSize="17sp" />
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <SearchView
         android:id="@+id/searchView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:layout_below="@+id/textViewListName" >
+        android:layout_below="@+id/textViewClosingTime" >
     </SearchView>
 
     <ListView

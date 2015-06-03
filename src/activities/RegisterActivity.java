@@ -13,11 +13,11 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.idc.milab.mrnote.R;
 
 public class RegisterActivity extends AbsractAppActivity {
@@ -33,6 +33,7 @@ public class RegisterActivity extends AbsractAppActivity {
 		if (checkPlayServices()){
 			checkIfNewUserOrNewVersion();
 			super.onCreate(savedInstanceState);
+			((ImageButton) findViewById(R.id.action_bar_item_prev)).setVisibility(View.GONE);
 			setContentView(R.layout.activity_register);
 			phoneNumber = (EditText) findViewById(R.id.editTextPhoneNumber);
 			nickName = (EditText) findViewById(R.id.editTextNickName);
@@ -44,8 +45,8 @@ public class RegisterActivity extends AbsractAppActivity {
 	private void checkIfNewUserOrNewVersion() 
 	{
 		SharedPref.initSharedPrefs(getApplicationContext());
-		String userid = SharedPref.getSharedPrefsString(ConstService.PREF_USER_ID, ConstService.PREF_DEFAULT);
-		String regestrationVersion = SharedPref.getSharedPrefsString(ConstService.PREF_REGESTRATION_VERSION_KEY, ConstService.PREF_DEFAULT);
+		String userid = SharedPref.getSharedPrefsString(ConstService.PREF_USER_ID);
+		String regestrationVersion = SharedPref.getSharedPrefsString(ConstService.PREF_REGESTRATION_VERSION_KEY);
 
 		if (!userid.equals(ConstService.PREF_DEFAULT) && regestrationVersion.equals(ConstService.REGESTATION_VERSION))
 		{
@@ -79,7 +80,7 @@ public class RegisterActivity extends AbsractAppActivity {
 		final String phone = PhoneNumberUtils.formatNumberToE164(phoneCode.getText().toString() + phoneNumber.getText().toString(), "IL"); 
 		final String nick = nickName.getText().toString();
 		String android_id = Secure.getString(getApplicationContext().getContentResolver(),Secure.ANDROID_ID); 
-		String regId = SharedPref.getSharedPrefsString(ConstService.PREF_REGESTRATION_ID, ConstService.PREF_DEFAULT);
+		String regId = SharedPref.getSharedPrefsString(ConstService.PREF_REGESTRATION_ID);
 
 		CreateNewUser.OnFinishedListener listenner = new CreateNewUser.OnFinishedListener() 
 		{

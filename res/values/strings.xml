@@ -5,8 +5,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="LOGO">My Shared Note!</string>
     <string name="title_activity_create_list_screen">CreateListScreen</string>
-    <string name="createList">Name Your List</string>
-    <string name="listNamePromptMessage">name your list here...</string>
+    <string name="createList">Name your note</string>
+    <string name="listNamePromptMessage">name your note here...</string>
     <string name="title_activity_list_time">Share-Note MiLab</string>
     <string name="title_activity_select_users">SelectUsersActivity</string>
     <string name="action_settings">Settings</string>
@@ -19,7 +19,7 @@
     <string name="addItem">Add an item</string>
     <string name="title_activity_register">RegisterActivity</string>
 	<string name="loading">Creating list, please wait.</string>
-	<string name="no_lists">Create a new list by pressing the button</string>
+	<string name="no_lists">Create a new note</string>
 
 
     <string-array name="CountryCodes">

@@ -48,7 +48,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 		setContentView(R.layout.activity_shopping_list);
 		listViewItems = new MyListView<String>(this, R.layout.shopping_list_items, (ListView) findViewById(R.id.listViewListItems));
 		createCustomAdapter();
-		textViewListName = (TextView) findViewById(R.id.textViewListName);
+		textViewListName = (TextView) findViewById(R.id.textViewClosingTime);
 		textViewUsers = (TextView) findViewById(R.id.textViewListUsers);
 		textViewTimeLeft = (TextView)findViewById(R.id.textViewTimeLeft);
 
@@ -140,7 +140,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 		};
 
 		AddItemToListTask task = new AddItemToListTask(onFinishedListener);
-		String userNick = SharedPref.getSharedPrefsString(ConstService.PREF_USER_NICK, ConstService.PREF_DEFAULT);
+		String userNick = SharedPref.getSharedPrefsString(ConstService.PREF_USER_NICK);
 		if (!userNick.equals(ConstService.PREF_DEFAULT))
 		{
 			userNick = ConstService.ITEM_ADDER_SEPERATOR + userNick;
@@ -180,7 +180,7 @@ public class ShoppingListActivity extends AbsractAppActivity
 					}
 				}
 
-				if (adder.equals(SharedPref.getSharedPrefsString(ConstService.PREF_USER_NICK, ConstService.PREF_DEFAULT)))
+				if (adder.equals(SharedPref.getSharedPrefsString(ConstService.PREF_USER_NICK)))
 				{
 					adder = "Me";
 				}

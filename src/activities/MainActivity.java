@@ -11,7 +11,6 @@ import utils.SharedPref;
 import AsyncTasks.GetUserListsById;
 import NoteObjects.ShoppingList;
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -22,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,7 +34,7 @@ public class MainActivity extends ActionBarActivity {
 	ListView myListsView;
 
 	TextView textViewNoLists;
-	Button buttonAddList;
+	ImageButton buttonAddList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
 		setActionBar();
 		myListsView = (ListView) findViewById(R.id.listViewMyLists);
 		textViewNoLists = (TextView) findViewById(R.id.textViewNoLists);
-		buttonAddList = (Button) findViewById(R.id.buttonStartList);
+		buttonAddList = (ImageButton) findViewById(R.id.buttonStartList);
 		textViewNoLists.setVisibility(View.GONE);
 		buttonAddList.setVisibility(View.GONE);
 		setListenerToList();
@@ -102,7 +102,7 @@ public class MainActivity extends ActionBarActivity {
 		};
 
 		GetUserListsById task = new GetUserListsById(listener);
-		String param = SharedPref.getSharedPrefsString(ConstService.PREF_PHONE_NUM, null);
+		String param = SharedPref.getSharedPrefsString(ConstService.PREF_PHONE_NUM);
 
 		task.execute(param);
 	}
@@ -137,7 +137,6 @@ public class MainActivity extends ActionBarActivity {
 				TextView listOpener = (TextView) view.findViewById(R.id.listItemListOpener);
 				TextView endTime = (TextView) view.findViewById(R.id.listItemListDate);
 
-				//TODO: setOpner!
 				String date = (new SimpleDateFormat("dd/M")).format(new Date(item.getStartTime()));
 				String timeLeft = item.calculateTimeLeft();
 				if (timeLeft.equals("Done"))
@@ -150,7 +149,8 @@ public class MainActivity extends ActionBarActivity {
 				}
 
 				listName.setText(item.getName());
-				listOpener.setText("me");
+				String opener = item.getOpnerName().equals(SharedPref.getSharedPrefsString(ConstService.PREF_USER_NICK)) ? "Me" : item.getOpnerName();
+				listOpener.setText(opener);
 				endTime.setText(timeLeft);
 				return view;
 			}};

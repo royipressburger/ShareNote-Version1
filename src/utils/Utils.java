@@ -31,12 +31,7 @@ public class Utils
 	public static String shoppingListToCreateToJson(ShoppingList listToCreate) throws JSONException
 	{
 		JSONObject json = new JSONObject(new Gson().toJson(listToCreate));
-		JSONArray usersArray = json.getJSONArray(ConstService.LIST_USERS);
 		json.remove("_id");
-//		for (int i = 0; i < usersArray.length(); i++) 
-//		{
-//			usersArray.getJSONObject(i).remove("name");
-//		}
 		return json.toString();
 	}
 	
